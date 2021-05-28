@@ -5,7 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ELibrary.Data\ELibrary.Data.csproj" />
     <ProjectReference Include="..\ELibrary.ViewModels\ELibrary.ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.6" />
   </ItemGroup>
 
 </Project>
