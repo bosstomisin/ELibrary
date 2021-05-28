@@ -23,6 +23,7 @@ namespace ELibrary.MVC
             services.AddControllersWithViews();
 
             services.AddJwtAuth(Configuration);
+            services.AddDependencyInjection();
 
         }
 
