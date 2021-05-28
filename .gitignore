@@ -365,3 +365,6 @@ FodyWeavers.xsd
 #Appsettings
 [Aa]ppsettings.json
 [Aa]ppsettings.[Dd]evelopment.json
+
+#idea
+.idea/
