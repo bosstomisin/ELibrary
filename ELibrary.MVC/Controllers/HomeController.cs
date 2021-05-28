@@ -1,8 +1,5 @@
-﻿using ELibrary.Core.Abstractions;
-using ELibrary.ViewModels;
+﻿using ELibrary.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 
 namespace ELibrary.MVC.Controllers
