@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELibrary.Core", "ELibrary.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELibrary.Models", "ELibrary.Models\ELibrary.Models.csproj", "{7FB7A8A4-0BEB-44B5-BBA6-E43298D8412B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELibrary.Services", "ELibrary.Services\ELibrary.Services.csproj", "{19EC070A-9F41-4072-B2D6-B830FAE21FE3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELibrary.Data", "ELibrary.Data\ELibrary.Data.csproj", "{687FC285-9956-422E-B76C-AF9570381AE3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELibrary.Common", "ELibrary.Common\ELibrary.Common.csproj", "{053BA7CD-ABFE-4CC6-B88D-4A5EDAFC58BD}"
@@ -37,10 +35,6 @@ Global
 		{7FB7A8A4-0BEB-44B5-BBA6-E43298D8412B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FB7A8A4-0BEB-44B5-BBA6-E43298D8412B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FB7A8A4-0BEB-44B5-BBA6-E43298D8412B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{19EC070A-9F41-4072-B2D6-B830FAE21FE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{19EC070A-9F41-4072-B2D6-B830FAE21FE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{19EC070A-9F41-4072-B2D6-B830FAE21FE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{19EC070A-9F41-4072-B2D6-B830FAE21FE3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{687FC285-9956-422E-B76C-AF9570381AE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{687FC285-9956-422E-B76C-AF9570381AE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{687FC285-9956-422E-B76C-AF9570381AE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
