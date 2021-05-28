@@ -1,3 +1,4 @@
+using ELibrary.MVC.Extensions;
 using ELibrary.Data;
 using ELibrary.Models;
 using Microsoft.AspNetCore.Builder;
@@ -22,8 +23,12 @@ namespace ELibrary.MVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //Database Setup
+
             services.AddControllersWithViews();
+
+            services.AddJwtAuth(Configuration);
+            services.AddDependencyInjection();
+
             services.AddDbContextPool<ELibraryDbContext>
                 (option => option.UseSqlite(Configuration.GetConnectionString("Default")));
 
@@ -58,6 +63,7 @@ namespace ELibrary.MVC
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

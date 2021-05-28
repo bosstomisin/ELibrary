@@ -1,6 +1,5 @@
 ﻿using ELibrary.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 
 namespace ELibrary.MVC.Controllers
@@ -8,12 +7,9 @@ namespace ELibrary.MVC.Controllers
     public class HomeController : Controller
     {
 
-        public HomeController()
-        {
-        }
-
         public IActionResult Index()
         {
+           
             return View();
         }
 
