@@ -1,6 +1,7 @@
 ﻿using ELibrary.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Diagnostics;
 
 namespace ELibrary.MVC.Controllers
@@ -14,11 +15,13 @@ namespace ELibrary.MVC.Controllers
 
         public IActionResult Index()
         {
+            
             return View();
         }
 
         public IActionResult Privacy()
         {
+            //throw new Exception("New Exception"); for testing purpose
             return View();
         }
 

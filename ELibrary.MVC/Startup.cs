@@ -1,3 +1,4 @@
+using ELibrary.MVC.ServiceExtensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -30,10 +31,12 @@ namespace ELibrary.MVC
             }
             else
             {
+                app.UseStatusCodePagesWithReExecute("/Error/{0}");
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            //app.ConfigureExceptionHandler();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
