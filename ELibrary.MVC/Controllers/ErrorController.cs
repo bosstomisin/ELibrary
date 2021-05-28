@@ -1,16 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ELibrary.MVC.Controllers
 {
     public class ErrorController : Controller
     {
-        private static string errPath, errString = "";
+       
         [AllowAnonymous]
         [Route("/Error/{statusCode}")]
         public IActionResult ErrorHandler(int statusCode)
@@ -20,21 +16,25 @@ namespace ELibrary.MVC.Controllers
             {
                 case 404:
                     var statusDetails = HttpContext.Features.Get<IStatusCodeReExecuteFeature>();
-                    errPath = statusDetails.OriginalPath;
-                    errString = statusDetails.OriginalQueryString;
+                    var errPath = statusDetails.OriginalPath;
+                    var errString = statusDetails.OriginalQueryString;
                     //_logger.LogError($"{errPath}, {errString}");
                     break;
+                
+                    
             }
 
-            return RedirectToAction("NotFoundPage");
+            return View("NotFoundPage");
         }
+        
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult NotFoundPage()
+        public IActionResult ServerError()
         {
-            ViewBag.ErrorPath = errPath;
-            ViewBag.ErrorString = errString;
-            return View();
+            var ExceptionFeature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+            var ErrMsg = ExceptionFeature.Error.Message;
+            // and others to be logged.
+            return View("ServerErrorPage");
         }
     }
 }

@@ -21,7 +21,7 @@ namespace ELibrary.MVC.Controllers
 
         public IActionResult Privacy()
         {
-            //throw new Exception("New Exception"); for testing purpose
+            throw new Exception("New Exception"); //for testing purpose
             return View();
         }
 
