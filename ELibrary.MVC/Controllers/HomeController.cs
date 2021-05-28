@@ -9,20 +9,10 @@ namespace ELibrary.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IJwtTokenGenerator _tokenGenerator;
-        private readonly IConfiguration _config;
-
-        public HomeController(IJwtTokenGenerator tokenGenerator, IConfiguration config)
-        {
-            _tokenGenerator = tokenGenerator;
-            _config = config;
-        }
 
         public IActionResult Index()
         {
-            var roles = new[] { "Admin" };
-            var token = _tokenGenerator.GenerateToken("Raphael", "566768", "raphael", _config, roles);
-            ViewBag.token = token;
+           
             return View();
         }
 

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ELibrary.MVC.Extensions
 {
-    public static class JwtServiceExtension
+    public static class JwtAuthenticationExtension
     {
         public static void AddJwtAuth( this IServiceCollection services, IConfiguration configuration)
         {
