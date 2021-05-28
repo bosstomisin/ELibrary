@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ELibrary.Data\ELibrary.Data.csproj" />
     <ProjectReference Include="..\ELibrary.ViewModels\ELibrary.ViewModels.csproj" />
   </ItemGroup>
 
