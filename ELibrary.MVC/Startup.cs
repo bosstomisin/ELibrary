@@ -47,7 +47,7 @@ namespace ELibrary.MVC
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ELibraryDbContext context, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             app.UseMiddleware<ExceptionMiddleWare>();
             if (env.IsDevelopment())
@@ -69,6 +69,8 @@ namespace ELibrary.MVC
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            LibrarySeeder.ELibararyDbContext(context, userManager, roleManager).Wait();
 
             app.UseEndpoints(endpoints =>
             {
