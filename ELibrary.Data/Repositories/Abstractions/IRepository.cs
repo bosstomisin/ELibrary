@@ -1,13 +1,14 @@
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ELibrary.Data.Repositories.Abstractions
 {
-    public interface IRepository<T>
+    public interface IRepository<T> where T : class 
     {
-        T Get(int id);
-        IQueryable<T> Get();
-        T Save(T model);
-        T Update(T model);
-        IQueryable<T> Delete(T model);
+        Task<T> GetById(int id);
+        IQueryable<T> GetAll();
+        Task<bool> Save(T model);
+        Task<bool> Update(T model);
+        Task<bool> DeleteById(int id);
     }
 }
