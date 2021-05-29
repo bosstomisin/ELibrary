@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace ELibrary.ViewModels
 {
-    class EmailConfirmationViewModel
+    public class EmailConfirmationViewModel
     {
+        public string FirstName { get; set; }
+        public string Link { get; set; }
     }
 }
