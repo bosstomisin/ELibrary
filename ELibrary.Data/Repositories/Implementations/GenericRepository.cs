@@ -1,7 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using ELibrary.Data.Repositories.Abstractions;
-using Microsoft.EntityFrameworkCore;
 
 namespace ELibrary.Data.Repositories.Implementations
 {
