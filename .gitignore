@@ -368,3 +368,6 @@ FodyWeavers.xsd
 
 #idea
 .idea/
+
+#vscode
+.vscode/
