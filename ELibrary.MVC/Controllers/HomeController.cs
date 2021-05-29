@@ -1,16 +1,24 @@
-﻿using ELibrary.ViewModels;
+﻿using ELibrary.Models;
+using ELibrary.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace ELibrary.MVC.Controllers
 {
     public class HomeController : Controller
     {
 
+        public HomeController()
+        {
+
+        }
+
         public IActionResult Index()
         {
             return View();
         }
+
 
         public IActionResult Privacy()
         {
