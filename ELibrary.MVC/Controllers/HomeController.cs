@@ -9,16 +9,11 @@ namespace ELibrary.MVC.Controllers
 
         public IActionResult Index()
         {
-        }
-
-        public IActionResult Index()
-        {
             return View();
         }
 
         public IActionResult Privacy()
         {
-            throw new Exception("New Exception"); //for testing purpose
             return View();
         }
 

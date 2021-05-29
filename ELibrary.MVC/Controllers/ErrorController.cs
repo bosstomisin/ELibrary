@@ -12,15 +12,6 @@ namespace ELibrary.MVC.Controllers
         public IActionResult ErrorHandler(int statusCode)
         {
 
-            switch (statusCode)
-            {
-                case 404:
-                   
-                    break;
-                
-                    
-            }
-
             return View("NotFoundPage");
         }
         
