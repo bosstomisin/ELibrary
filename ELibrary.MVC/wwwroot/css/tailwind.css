@@ -15,6 +15,10 @@
     @apply border-gray-300 rounded shadow-sm focus:border-blue-200 focus:ring focus:ring-blue-100 focus:ring-opacity-50;
   }
 
+  .label {
+    @apply text-sm font-medium text-gray-700;
+  }
+
   .btn-parent {
     @apply inline-flex items-center justify-center transition duration-150 ease-in-out border rounded-full shadow hover:shadow-lg focus:outline-none focus:shadow-lg focus:ring;
   }
