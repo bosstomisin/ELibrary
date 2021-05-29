@@ -1,6 +1,11 @@
+using ELibrary.MVC.Extensions;
+using ELibrary.Data;
+using ELibrary.Models;
 using ELibrary.MVC.ExceptionExtension;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -19,7 +24,26 @@ namespace ELibrary.MVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddControllersWithViews();
+
+            services.AddJwtAuth(Configuration);
+            services.AddDependencyInjection();
+
+            services.AddDbContextPool<ELibraryDbContext>
+                (option => option.UseSqlite(Configuration.GetConnectionString("Default")));
+
+            //Identity Setup
+            services.AddIdentity<AppUser, IdentityRole>(
+                options =>
+                {
+                    options.Password.RequiredUniqueChars = 0;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequiredLength = 5;
+                    options.Password.RequireLowercase = false;
+
+                }
+                ).AddEntityFrameworkStores<ELibraryDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +67,7 @@ namespace ELibrary.MVC
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
