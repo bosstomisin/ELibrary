@@ -1,5 +1,4 @@
-﻿
-namespace ELibrary.Models
+﻿namespace ELibrary.Models
 {
     public class ApiException
     {

@@ -15,10 +15,7 @@ namespace ELibrary.MVC.Controllers
             switch (statusCode)
             {
                 case 404:
-                    var statusDetails = HttpContext.Features.Get<IStatusCodeReExecuteFeature>();
-                    var errPath = statusDetails.OriginalPath;
-                    var errString = statusDetails.OriginalQueryString;
-                    //_logger.LogError($"{errPath}, {errString}");
+                   
                     break;
                 
                     
