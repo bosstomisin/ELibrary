@@ -1,6 +1,7 @@
 using ELibrary.MVC.Extensions;
 using ELibrary.Data;
 using ELibrary.Models;
+using ELibrary.MVC.ExceptionExtension;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -48,16 +49,19 @@ namespace ELibrary.MVC
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseMiddleware<ExceptionMiddleWare>();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseStatusCodePagesWithReExecute("/Error/{0}");
+                
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            //app.ConfigureExceptionHandler();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

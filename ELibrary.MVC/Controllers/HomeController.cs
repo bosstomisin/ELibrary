@@ -9,7 +9,6 @@ namespace ELibrary.MVC.Controllers
 
         public IActionResult Index()
         {
-           
             return View();
         }
 
