@@ -11,8 +11,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ELibrary.Core.Abstractions;
-using ELibrary.Core.Implementations;
 using AutoMapper;
 
 namespace ELibrary.MVC
