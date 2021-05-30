@@ -1,0 +1,38 @@
+using System.Threading.Tasks;
+using ELibrary.Core.Abstractions;
+using ELibrary.Data.Repositories.Abstractions;
+using ELibrary.Models;
+using Microsoft.AspNetCore.Mvc;
+
+namespace ELibrary.MVC.Controllers.ApiControllers
+{
+    public class BookController: BaseApiController
+    {
+        private readonly IBookServices _bookServices;
+
+        public BookController(IBookServices bookServices)
+        {
+            _bookServices = bookServices;
+        }
+        
+        [HttpGet("book")]
+        public async Task<IActionResult> GetAll(int pageIndex)
+        {
+            var response = await _bookServices.GetAll(pageIndex);
+            if (response.Success)
+                return Ok(response);
+
+            return NotFound(response);
+        }
+
+        [HttpGet("book/{id:int}/delete")]
+        public async Task<IActionResult> DeleteById(int id)
+        {
+            var response = await _bookServices.DeleteById(id);
+            if (response.Success)
+                return Ok(response);
+
+            return Ok(response);
+        }
+    }
+}
