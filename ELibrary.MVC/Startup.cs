@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using AutoMapper;
 
 namespace ELibrary.MVC
 {
@@ -54,6 +55,7 @@ namespace ELibrary.MVC
             services.AddScoped<IEmailServices, EmailServices>();
             services.AddScoped<ICloudinaryServices, CloudinaryServices>();
             services.AddScoped<IAuthServices, AuthServices>();
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
