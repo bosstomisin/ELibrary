@@ -1,9 +1,11 @@
+﻿using ELibrary.Models;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace ELibrary.Models
+namespace ELibrary.Dtos
 {
-    public class Book
+   public  class GetBookDto
     {
         public int Id { get; set; }
         public int CategoryId { get; set; }
@@ -24,8 +26,6 @@ namespace ELibrary.Models
         public IEnumerable<Rating> Rate { get; set; }
         public IEnumerable<Review> Reviews { get; set; }
         public Category Category { get; set; }
-
-
 
 
 
