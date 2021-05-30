@@ -13,23 +13,63 @@ using System.Threading.Tasks;
 
 namespace ELibrary.MVC.Controllers.ApiControllers
 {
+    [AllowAnonymous]
     public class AuthController : BaseApiController
     {
         private IAuthServices _authservices;
-        private readonly UserManager<AppUser> _userManager;
-        private readonly IEmailServices _emailServices;
-        private readonly IConfiguration _configuration;
+     
 
-        public AuthController(UserManager<AppUser> userManager,IAuthServices authServices, IEmailServices emailServices, IConfiguration configuration)
+        public AuthController(IAuthServices authServices)
         {
             _authservices = authServices;
-            _userManager = userManager;
-            _emailServices = emailServices;
-            _configuration = configuration;
+          
         }
 
 
-        // api/auth/forgetpassword
+
+        [HttpPost("Register")]
+        public async Task<IActionResult> RegisterAsync([FromForm] RegistrationDto model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _authservices.RegisterUserAsync(model);
+                return Ok(result);
+            }
+            return BadRequest("not successful!");
+        }
+
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login([FromForm] LoginDetailDto model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _authservices.LoginUserAsync(model);
+                return Ok(result);
+            }
+            return BadRequest("Some properties are not valid");
+
+        }
+
+        [HttpPost("Logout")]
+        public IActionResult LogOut()
+        {
+            var result = _authservices.Logout();
+            return Ok(result);
+
+        }
+
+
+        [HttpGet("ConfirmEmail")]
+        public async Task<IActionResult> ConfirmEmail(string userid, string token)
+        {
+            if (string.IsNullOrWhiteSpace(userid) || string.IsNullOrWhiteSpace(token))
+                return NotFound();
+
+            var result = await _authservices.ConfirmEmailAsync(userid, token);
+
+            return Ok(result);
+        }
+       
         [HttpPost("ForgetPassword")]
         public async Task<IActionResult> ForgetPassword([FromBody]ForgotPwdDto model)
         {
@@ -39,15 +79,14 @@ namespace ELibrary.MVC.Controllers.ApiControllers
             var result = await _authservices.ForgetPasswordAsync(model.Email, Url, Request.Scheme);
 
             if (result.Success)
-                return Ok(result); // 200
+                return Ok(result);
 
-            return BadRequest(result); // 400
+            return BadRequest(result); 
         }
 
 
 
 
-        // api/auth/resetpassword
         [HttpPost("ResetPassword")]
         public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto model)
         {
