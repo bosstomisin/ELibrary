@@ -12,6 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ELibrary.Data\ELibrary.Data.csproj" />
+    <ProjectReference Include="..\ELibrary.Dtos\ELibrary.Dtos.csproj" />
     <ProjectReference Include="..\ELibrary.Models\ELibrary.Models.csproj" />
   </ItemGroup>
 
