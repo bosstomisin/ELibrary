@@ -1,9 +1,7 @@
-using ELibrary.Core.Abstractions;
-using ELibrary.Core.Implementations;
+using ELibrary.MVC.Extensions;
 using ELibrary.Data;
 using ELibrary.Models;
 using ELibrary.MVC.ExceptionExtension;
-using ELibrary.MVC.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -11,7 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using AutoMapper;
+using ELibrary.Core.Abstractions;
+using ELibrary.Core.Implementations;
 
 namespace ELibrary.MVC
 {
@@ -44,18 +43,14 @@ namespace ELibrary.MVC
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequiredLength = 5;
                     options.Password.RequireLowercase = false;
-                    options.User.RequireUniqueEmail = true;
-                    options.SignIn.RequireConfirmedEmail = true;
 
                 }
-                ).AddEntityFrameworkStores<ELibraryDbContext>().AddDefaultTokenProviders();
+                ).AddEntityFrameworkStores<ELibraryDbContext>();
             services.AddEmailConfiguration(Configuration);
-            services.AddCloudinaryConfiguration(Configuration);
+            services.AddCloudinaryConfiguration(Configuration); 
             services.AddCloudinaryPhotoConfiguration(Configuration);
             services.AddScoped<IEmailServices, EmailServices>();
             services.AddScoped<ICloudinaryServices, CloudinaryServices>();
-            services.AddScoped<IAuthServices, AuthServices>();
-            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,7 +64,7 @@ namespace ELibrary.MVC
             else
             {
                 app.UseStatusCodePagesWithReExecute("/Error/{0}");
-
+                
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
