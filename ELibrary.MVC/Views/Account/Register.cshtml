@@ -5,48 +5,54 @@
 }
 <div class="container py-24">
     <div class="flex justify-center">
-        <div class="w-2/4 bg-white p-6 shadow-md">
-            <form method="post" asp-controller="" asp-action="">
+        <div class="w-2\/4 bg-white p-6 shadow-2xl border-t-8 border-blue-500" >
+            <div class="py-4">
+                <h2 class="text-center font-bold text-3xl antialiased tracking-wide">Register</h2>
+            </div>
+
+            <form method="" asp-controller="" asp-action="">
                 <div asp-validation-summary="ModelOnly"></div>
 
                 <div class="mb-4">
-                    <label asp-for="FirstName" class="label"></label>
-                    <input asp-for="FirstName" type="text" class="input w-full" />
-                    <span asp-validation-for="FirstName" class="text-red-600 italic text-sm"></span>
+                    <label asp-for="@Model.FirstName" class="label"></label>
+                    <input asp-for="@Model.FirstName" type="text" class="input w-full" />
+                    <div><span asp-validation-for="@Model.FirstName" class="text-red-600 italic text-sm"></span></div>
                 </div>
 
                 <div class="mb-4">
-                    <label asp-for="LastName" class="label"></label>
-                    <input asp-for="LastName" type="text" class="input w-full" />
-                    <span asp-validation-for="LastName" class="text-red-600 italic text-sm"></span>
+                    <label asp-for="@Model.LastName" class="label"></label>
+                    <input asp-for="@Model.LastName" type="text" class="input w-full" />
+                    <div><span asp-validation-for="@Model.LastName" class="text-red-600 italic text-sm"></span></div>
                 </div>
 
                 <div class="mb-4">
-                    <label asp-for="Email" class="label"></label>
-                    <input asp-for="Email" type="text" class="input w-full" />
-                    <span asp-validation-for="Email" class="text-red-600 italic text-sm"></span>
+                    <label asp-for="@Model.Email" class="label"></label>
+                    <input asp-for="@Model.Email" type="email" class="input w-full" />
+                    <div><span asp-validation-for="@Model.Email" class="text-red-600 italic text-sm"></span></div>
                 </div>
 
                 <div class="mb-4">
-                    <label asp-for="Password" class="label"></label>
-                    <input asp-for="Password" type="text" class="input w-full" />
-                    <span asp-validation-for="Password" class="text-red-600 italic text-sm"></span>
+                    <label asp-for="@Model.Password" class="label"></label>
+                    <input asp-for="@Model.Password" type="password" class="input w-full" />
+                    <div><span asp-validation-for="@Model.Password" class="text-red-600 italic text-sm"></span></div>
                 </div>
 
                 <div class="mb-4">
-                    <label asp-for="ConfirmPassword" class="label"></label>
-                    <input asp-for="ConfirmPassword" type="text" class="input w-full" />
-                    <span asp-validation-for="ConfirmPassword" class="text-red-600 italic text-sm"></span>
+                    <label asp-for="@Model.ConfirmPassword" class="label"></label>
+                    <input asp-for="@Model.ConfirmPassword" type="password" class="input w-full" />
+                    <div><span asp-validation-for="@Model.ConfirmPassword" class="text-red-600 italic text-sm"></span></div>
+                </div>
+
+                <div class="w-36 mx-auto mb-8">
+                    <button type="submit" class="font-semibold bg-blue-500 py-2 px-12 text-blue-100 rounded">Register</button>
                 </div>
 
                 <div class="flex items-center justify-between">
                     <div>
-                        Don't have an account? Click
-                        <a href="" class="hover:underline text-blue-600">here</a>
+                        Already have an account?
+                        <a href="" class="hover:underline text-blue-600">Login</a>
                     </div>
-                    <div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
+
                 </div>
             </form>
         </div>
