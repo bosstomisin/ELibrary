@@ -11,18 +11,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Poppins:wght@200;400;600&display=swap" rel="stylesheet">
 </head>
 
+<body class="font-sans text-gray-800">
+<header>
+    <partial name="Components/_Navbar" />
+</header>
 
-<body class="font-sans">
+<main role="main" class="pb-3">
+    @RenderBody()
+</main>
 
-    
-        
-    
-    
-
-
-    <main role="main" class="pb-3">
-        @RenderBody()
-    </main>
+<partial name="Components/_Footer" />
 </body>
 
 </html>

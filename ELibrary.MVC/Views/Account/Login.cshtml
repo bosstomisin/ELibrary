@@ -1,46 +1,48 @@
 ﻿@model LoginViewModel
 
-@{ 
+@{
     ViewBag.Title = "Login";
-    Layout = "_HomeLayout.cshtml";
+    Layout = "_HomeLayout";
 }
 
 <div class="container py-24">
-    
+
     <div class="flex justify-center ">
-        <div class="w-2\/4 bg-white p-6 shadow-2xl border-t-8 border-blue-500 ">
+        <div class="w-2\/4 bg-white p-6 shadow-2xl border-t-8 border-blue-600 ">
             <div class="py-4">
-                <h2 class="text-center font-bold text-3xl antialiased tracking-wide">Login</h2>
+                <h2 class="text-3xl antialiased font-bold tracking-wide text-center">Login</h2>
             </div>
 
             <form action="">
                 <div class="mb-4">
                     <label asp-for="@Model.Email" class="label"></label>
-                    <input type="email" asp-for="@Model.Email" class="input w-full" />
-                    <div class="text-sm text-red-400 lowercase mt-2"> <span asp-validation-for="@Model.Email"></span></div>
-                   
+                    <input type="email" asp-for="@Model.Email" class="w-full input" />
+                    <div class="mt-2 text-sm text-red-400 lowercase"> <span asp-validation-for="@Model.Email"></span>
+                    </div>
+
                 </div>
                 <div class="mb-4">
                     <label asp-for="@Model.Password" class="label"></label>
-                    <input asp-for="@Model.Password" class="input w-full" />
-                    <div class="text-sm text-red-400 lowercase mt-2"> <span asp-validation-for="@Model.Password"></span></div>
+                    <input asp-for="@Model.Password" class="w-full input" />
+                    <div class="mt-2 text-sm text-red-400 lowercase"> <span asp-validation-for="@Model.Password"></span>
+                    </div>
                 </div>
                 <div class="mb-4">
                     <input asp-for="@Model.RememberMe" class="input" />
                     <label asp-for="@Model.RememberMe" class="label"></label>
                 </div>
-                <div class="w-36 mx-auto mb-8">
-                    <button type="submit" class="font-semibold bg-blue-500 py-2 px-12 text-blue-100 rounded">Login</button>
+                <div class="flex justify-center">
+                    <button type="submit" class="btn inline-block btn-primary">Login</button>
                 </div>
                 <div class="flex items-center justify-between">
                     <div class="text-xs">
                         Don't have an account?
-                        <a href="" class="hover:underline text-blue-600">Register</a>
+                        <a href="" class="text-blue-600 hover:underline">Register</a>
                     </div>
 
                 </div>
-                <div class="w-36 mx-auto mt-4 text-xs">
-                    <a href="" class="hover:underline text-blue-600">Forgot Password</a>
+                <div class="mx-auto mt-4 text-xs w-36">
+                    <a href="" class="text-blue-600 hover:underline">Forgot Password</a>
                 </div>
             </form>
         </div>
