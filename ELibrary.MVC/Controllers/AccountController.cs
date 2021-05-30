@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+﻿using ELibrary.ViewModels;
 
 namespace ELibrary.MVC.Controllers
 {
@@ -15,7 +16,13 @@ namespace ELibrary.MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult ChangePassword()
+        public IActionResult ChangePassword() 
+        {
+            return View();
+        }
+       
+        [HttpGet]
+        public IActionResult Login()
         {
             return View();
         }
