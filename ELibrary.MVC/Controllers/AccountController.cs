@@ -9,8 +9,9 @@ namespace ELibrary.MVC.Controllers
 {
     public class AccountController : Controller
     {
+       
         [HttpGet]
-        public IActionResult Register()
+        public IActionResult Login()
         {
             return View();
         }
