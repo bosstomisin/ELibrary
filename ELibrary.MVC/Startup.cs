@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ELibrary.Core.Abstractions;
 using ELibrary.Core.Implementations;
+using AutoMapper;
 
 namespace ELibrary.MVC
 {
@@ -51,6 +52,7 @@ namespace ELibrary.MVC
             services.AddCloudinaryPhotoConfiguration(Configuration);
             services.AddScoped<IEmailServices, EmailServices>();
             services.AddScoped<ICloudinaryServices, CloudinaryServices>();
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
