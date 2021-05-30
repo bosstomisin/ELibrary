@@ -14,6 +14,12 @@ namespace ELibrary.MVC.Controllers
         {
             return View();
         }
+          
+        [HttpGet] 
+        public IActionResult Register() 
+        {
+            return View();
+        }
 
         [HttpGet]
         public IActionResult ChangePassword() 
