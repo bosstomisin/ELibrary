@@ -28,7 +28,7 @@ namespace ELibrary.Core.Implementations
         {
             var books = _bookRepository.GetAll().Select(book => _mapper.Map<GetBookDto>(book));
 
-            var pageSize = int.Parse(_config.GetSection("PageSize").Value);
+            var pageSize = int.Parse(_config.GetSection("PageSize:Default").Value);
             
             var paginatedBooks = await Pagination<GetBookDto>.CreateAsync(books, pageIndex, pageSize);
             

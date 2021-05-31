@@ -16,7 +16,25 @@ namespace ELibrary.MVC.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var most = new MostPopularViewModel();
+            var newest = new NewReleaseViewModel();
+            
+            var book1 = new BookViewModel();
+            var book2 = new BookViewModel();
+            var book3 = new BookViewModel();
+            var book4 = new BookViewModel();
+            var book5 = new BookViewModel();
+            
+            most.Books = new[] {book1, book2, book3, book4, book5};
+            newest.Books = new[] {book1, book2, book3, book4, book5};
+            
+            var model = new HomeViewModel
+            {
+                NewRelease = newest,
+                MostPopular = most
+            };
+            
+            return View(model);
         }
 
 
