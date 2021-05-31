@@ -1,47 +1,64 @@
-﻿using ELibrary.Core.Abstractions;
+﻿using AutoMapper;
+using ELibrary.Core.Abstractions;
+using ELibrary.Data.Repositories.Abstractions;
 using ELibrary.Data.Repositories.Implementations;
 using ELibrary.Dtos;
-using ELibrary.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ELibrary.Core.Implementations
 {
-    class BookService : IBookService
+    public class BookService : IBookService
     {
-        private readonly BookRepository _bookRepo;
+        private readonly IMapper _mapper;
+        private readonly IBookRepository _bookRepo;
        
 
-        public BookService(BookRepository BookRepo)
+        public BookService(IMapper mapper, IBookRepository BookRepo)
         {
+            _mapper = mapper;
             _bookRepo = BookRepo;
         }
 
-        public async Task<ResponseDto<IQueryable<BookDto>>> GetByCategory(string CategoryName, int pageIndex, int pageSize)
+        public async Task<ResponseDto<Pagination<GetBookDto>>> GetByCategory(string CategoryName, int pageIndex, int pageSize)
         {
-            ResponseDto<IQueryable<BookDto>> response = new ResponseDto<IQueryable<BookDto>>
+
+            //if (string.IsNullOrEmpty(CategoryName))
+            //{
+            //    var response = new ResponseDto<IQueryable<GetBookDto>>
+            //    {
+            //        Data = null,
+            //        Message = "Not found",
+            //        StatusCode = 404,
+            //        Success = false
+            //    };
+            //    return response;
+            //}
+
+            var books = _bookRepo.GetByCategoryName(CategoryName);
+
+            if (books == null)
             {
-                Success = false,
+                return new ResponseDto<Pagination<GetBookDto>>
+                {
+                    Data = null,
+                    Message = "Not found",
+                    StatusCode = 404,
+                    Success = false
+                };
+            }
+
+            var bookDto = books.Select(book => _mapper.Map<GetBookDto>(book));
+            var paginatedResult = await Pagination<GetBookDto>.CreateAsync(bookDto, pageIndex, pageSize);
+
+            var response = new ResponseDto<Pagination<GetBookDto>>
+            {
+                Data = paginatedResult,
+                Message = "Not found",
+                StatusCode = 404,
+                Success = false
             };
 
-            if (string.IsNullOrEmpty(CategoryName))
-            {
-                response.Message = "Not found";
-                response.StatusCode = 404;
-                response.Success = false;
-                return response;
-            }
-
-
-            var result = _bookRepo.GetByCategory(CategoryName);
-            if (result != null)
-            {
-                var paginatedResult = await Pagination<Book>.CreateAsync(result, pageIndex, pageSize);
-                paginatedResult.
-            }
             return response;
         }
     }

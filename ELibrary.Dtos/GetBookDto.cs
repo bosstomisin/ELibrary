@@ -1,13 +1,12 @@
 ﻿using ELibrary.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+
 
 namespace ELibrary.Dtos
 {
-    public class BookDto
+    public class GetBookDto
     {
         public int Id { get; set; }
         public int CategoryId { get; set; }

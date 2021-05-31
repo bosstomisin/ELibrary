@@ -14,11 +14,11 @@ namespace ELibrary.Core.Implementations
 {
     public class RateService : IRateService
     {
-        private readonly IRepository<Rating> _ratingRepository;
-        private readonly IRepository<Book> _bookRepository;
+        private readonly IRatingRepository _ratingRepository;
+        private readonly IBookRepository _bookRepository;
         private readonly UserManager<AppUser> _userManager;
 
-        public RateService(IRepository<Rating> ratingRepository, IRepository<Book> bookRepository, UserManager<AppUser> userManager)
+        public RateService(IRatingRepository ratingRepository, IBookRepository bookRepository, UserManager<AppUser> userManager)
         {
             _ratingRepository = ratingRepository;
             _bookRepository = bookRepository;
@@ -39,14 +39,29 @@ namespace ELibrary.Core.Implementations
                 var book = await _bookRepository.GetById(bookId);
                 var user = await _userManager.FindByIdAsync(userId);
 
-                var Rate = new Rating
+                if(book == null || user == null)
                 {
-                    Book = book,
-                    AppUser = user,
-                    AppUserId = userId,
-                    Rate = ratingValue
-                };
-                var result = await _ratingRepository.Save(Rate);
+                    response.Message = "Book or User does not exist";
+                    return response;
+                }
+
+                var rate = await _ratingRepository.GetByBookIdAndUserIdAsync(bookId, userId);
+                if(rate == null)
+                {
+                    rate = new Rating
+                    {
+                        Book = book,
+                        AppUser = user,
+                        AppUserId = userId,
+                        Rate = ratingValue
+                    };
+                }
+                else
+                {
+                    rate.Rate = ratingValue;
+                }
+               
+                var result = await _ratingRepository.Update(rate);
                 if (result == true)
                 {
                     response.Success = true;

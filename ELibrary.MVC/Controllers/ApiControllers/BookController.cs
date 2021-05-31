@@ -1,29 +1,43 @@
-﻿using ELibrary.Data;
-using ELibrary.Data.Repositories.Implementations;
+﻿using ELibrary.Core.Abstractions;
+using ELibrary.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ELibrary.MVC.Controllers.ApiControllers
 {
-    public class BookController : ControllerBase
+    [AllowAnonymous]
+    public class BookController : BaseApiController
     {
-        private readonly BookRepository _bookRepo;
+        private readonly IBookService _bookRepo;
+        private readonly IRateService _rateService;
 
-        public BookController(BookRepository BookRepo)
+        public BookController(IBookService bookService, IRateService rateService)
         {
-            _bookRepo = BookRepo;
+            _bookRepo = bookService;
+            _rateService = rateService;
         }
 
-        [HttpPost("GetBookByCategory")]
-        public IActionResult GetBookByCategory(string CategoryName)
+        [HttpGet("get-book-by-category")]
+        public async Task<IActionResult> GetBookByCategory([FromBody]GetBookByCategoryDto getBook)
         {
-            
+            var result =await  _bookRepo.GetByCategory(getBook.categoryName, getBook.pageIndex, getBook.pageSize);
+            if(result != null)
+            {
                 return Ok(result); // 200
+            }
+            return NotFound(result); // 404
+        }
 
-            return BadRequest(result); // 400
+        [HttpPost("rate-a-book")]
+        public async Task<IActionResult> RateABook([FromBody]RateABookDto rateABook)
+        {
+            var result = await _rateService.RateBook(rateABook.BookId, rateABook.RatingValue, rateABook.UserId);
+            if(result != null)
+            {
+                return Ok(result); // 200
+            }
+            return NotFound(); // 404
         }
     }
 }
