@@ -9,6 +9,7 @@ namespace ELibrary.MVC.Extensions
         public static void AddDependencyInjection(this IServiceCollection services)
         {
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+            services.AddScoped<IUserService, UserService>();
         }
     }
 }

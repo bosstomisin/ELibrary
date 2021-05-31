@@ -1,10 +1,12 @@
 ﻿using ELibrary.Core.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace ELibrary.MVC.Controllers.ApiControllers
 {
  
+    [AllowAnonymous]
     public class UserController : BaseApiController
     {
         
@@ -15,7 +17,7 @@ namespace ELibrary.MVC.Controllers.ApiControllers
             _userService = userService;
         }
 
-        [HttpGet("/User/{id}")]
+        [HttpGet("{userId}")]
         public async Task<IActionResult> GetUser(string userId)
         {
             var responseData = await _userService.GetUserByIdAsync(userId);
@@ -25,7 +27,7 @@ namespace ELibrary.MVC.Controllers.ApiControllers
                 return NotFound(responseData);
             return Ok(responseData);
         }
-        [HttpDelete("/User/{id}")]
+        [HttpDelete("{userId}")]
         public async Task<IActionResult> DeleteUser(string userId)
         {
             var responseData = await _userService.DeleteUserAsync(userId);
@@ -35,8 +37,8 @@ namespace ELibrary.MVC.Controllers.ApiControllers
                 return NotFound(responseData);
             return Ok(responseData);
         }
-        [HttpGet("/User/all-user")]
-        public async Task<IActionResult> GetUsers(int pageIndex)
+        [HttpGet("all-user")]
+        public async Task<IActionResult> GetUsers([FromQuery] int pageIndex)
         {
             var paginatedUsers = await _userService.GetUsersAsync(pageIndex);
             return Ok(paginatedUsers);

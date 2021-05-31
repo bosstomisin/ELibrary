@@ -5,15 +5,12 @@ using ELibrary.Dtos;
 using ELibrary.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ELibrary.Core.Implementations
 {
-    class UserService : IUserService
+    public class UserService : IUserService
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly IMapper _mapper;
@@ -29,7 +26,8 @@ namespace ELibrary.Core.Implementations
         {
             var response = new ResponseDto<bool>();
             var user = await _userManager.FindByIdAsync(userId);
-            if(user != null)
+            //var roles = await _userManager.GetRolesAsync(user);
+            if (user != null)
             {
                 var result = await _userManager.DeleteAsync(user);
                 if (result.Succeeded)
@@ -87,9 +85,9 @@ namespace ELibrary.Core.Implementations
 
         public async Task<ResponseDto<Pagination<GetUserDto>>> GetUsersAsync(int pageIndex)
         {
-            var users = _userManager.Users;
-            var mappedUsers = _mapper.Map<IQueryable<GetUserDto>>(users);
-            var pageSize = int.Parse(_config.GetSection("PageSize").Value);
+            
+            var mappedUsers = _userManager.Users.Select(user => _mapper.Map<GetUserDto>(user));
+            var pageSize = int.Parse(_config.GetSection("PageSize:Default").Value);
 
             var paginatedUsers = await Pagination<GetUserDto>.CreateAsync(mappedUsers, pageIndex, pageSize);
 
@@ -98,6 +96,7 @@ namespace ELibrary.Core.Implementations
                 Data = paginatedUsers,
                 Success = true,
                 StatusCode = 200,
+                Message = "Success"
             };
 
             return response;
