@@ -3,11 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-
-
 namespace ELibrary.Dtos
 {
-    public class GetBookDto
+    public class AddBookDto
     {
         public int Id { get; set; }
         public int CategoryId { get; set; }
@@ -28,5 +26,7 @@ namespace ELibrary.Dtos
         public IEnumerable<Rating> Rate { get; set; }
         public IEnumerable<Review> Reviews { get; set; }
         public Category Category { get; set; }
+
+
     }
 }
