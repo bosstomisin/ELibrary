@@ -1,14 +1,7 @@
 ﻿using ELibrary.Core.Abstractions;
-using ELibrary.Core.Implementations;
 using ELibrary.Dtos;
-using ELibrary.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ELibrary.MVC.Controllers.ApiControllers
@@ -70,7 +63,7 @@ namespace ELibrary.MVC.Controllers.ApiControllers
             return Ok(result);
         }
        
-        [HttpPost("ForgetPassword")]
+        [HttpPost("forget-password")]
         public async Task<IActionResult> ForgetPassword([FromBody]ForgotPwdDto model)
         {
             if (string.IsNullOrEmpty(model.Email))
@@ -87,7 +80,7 @@ namespace ELibrary.MVC.Controllers.ApiControllers
 
 
 
-        [HttpPost("ResetPassword")]
+        [HttpPost("reset-password")]
         public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto model)
         {
             if (ModelState.IsValid)
