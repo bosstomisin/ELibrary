@@ -26,8 +26,5 @@ namespace ELibrary.Dtos
         public IEnumerable<Rating> Rate { get; set; }
         public IEnumerable<Review> Reviews { get; set; }
         public Category Category { get; set; }
-
-
-
     }
 }

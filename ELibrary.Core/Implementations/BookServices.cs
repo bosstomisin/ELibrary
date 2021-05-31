@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ELibrary.Core.Abstractions;
 using ELibrary.Data.Repositories.Abstractions;
+using ELibrary.Data.Repositories.Implementations;
 using ELibrary.Dtos;
 using ELibrary.Models;
 using System;
@@ -22,6 +23,7 @@ namespace ELibrary.Core.Implementations
             _cloudinaryService = cloudinaryService;
             _mapper = mapper;
         }
+
         public async Task<ResponseDto<GetBookDto>> UpdatePhotoBook(int bookId, AddPhotoDto photo)
         {
             var response = new ResponseDto<GetBookDto>();
