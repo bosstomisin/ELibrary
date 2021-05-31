@@ -209,7 +209,7 @@ namespace ELibrary.Core.Implementations
             return new ConfirmEmailResponseDto
             {
                 IsSuccess = false,
-                Message = "Email did not confirm",
+                Message = "Email did not confirmed",
 
             };
         }
