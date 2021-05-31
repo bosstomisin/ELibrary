@@ -27,7 +27,7 @@ namespace ELibrary.Data.Repositories.Implementations
         {
             await _context.Set<T>().AddAsync(model);
             return await _context.SaveChangesAsync() >= 1;
-        }
+            }
 
         public async Task<bool> Update(T model)
         {

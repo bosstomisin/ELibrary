@@ -12,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using AutoMapper;
+using ELibrary.Data.Repositories.Abstractions;
+using ELibrary.Data.Repositories.Implementations;
 
 namespace ELibrary.MVC
 {
@@ -28,13 +30,17 @@ namespace ELibrary.MVC
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllersWithViews();
-
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
             services.AddJwtAuth(Configuration);
             services.AddDependencyInjection();
 
             services.AddDbContextPool<ELibraryDbContext>
                 (option => option.UseSqlite(Configuration.GetConnectionString("Default")));
+
+
 
             //Identity Setup
             services.AddIdentity<AppUser, IdentityRole>(
@@ -56,6 +62,8 @@ namespace ELibrary.MVC
             services.AddScoped<ICloudinaryServices, CloudinaryServices>();
             services.AddScoped<IAuthServices, AuthServices>();
             services.AddAutoMapper(typeof(Startup));
+            services.AddScoped<IReviewService, ReviewService>();
+            services.AddScoped<IReviewRepository, ReviewRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

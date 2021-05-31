@@ -27,7 +27,7 @@ namespace ELibrary.MVC.Controllers.ApiControllers
 
 
 
-        [HttpPost("Register")]
+        [HttpPost("register")]
         public async Task<IActionResult> RegisterAsync([FromForm] RegistrationDto model)
         {
             if (ModelState.IsValid)
@@ -38,7 +38,7 @@ namespace ELibrary.MVC.Controllers.ApiControllers
             return BadRequest("not successful!");
         }
 
-        [HttpPost("Login")]
+        [HttpPost("/Login")]
         public async Task<IActionResult> Login([FromForm] LoginDetailDto model)
         {
             if (ModelState.IsValid)
