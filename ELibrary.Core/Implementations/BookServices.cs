@@ -1,4 +1,5 @@
-﻿using ELibrary.Core.Abstractions;
+﻿using AutoMapper;
+using ELibrary.Core.Abstractions;
 using ELibrary.Data.Repositories.Abstractions;
 using ELibrary.Dtos;
 using ELibrary.Models;
@@ -9,29 +10,46 @@ using System.Threading.Tasks;
 
 namespace ELibrary.Core.Implementations
 {
-    public class BookServices
+    public class BookServices : IBookServices
     {
         private readonly IRepository<Book> _bookRepository;
         private readonly ICloudinaryServices _cloudinaryService;
+        private readonly IMapper _mapper;
 
-        public BookServices(IRepository<Book> bookRepository, ICloudinaryServices cloudinaryService)
+        public BookServices(IRepository<Book> bookRepository, ICloudinaryServices cloudinaryService, IMapper mapper)
         {
             _bookRepository = bookRepository;
             _cloudinaryService = cloudinaryService;
+            _mapper = mapper;
         }
-        //public async Task<ResponseDto<GetBookDto>> AddPhotoBook(int id, AddPhotoDto photo)
-        //{
-        //    var file = photo.PhotoFile;
-        //    var book = await _bookRepository.GetById(id);
-        //    if(book == null)
-        //    {
-        //       // ResponseDto
-        //    }
-        //    var PhotoInfo = await _cloudinaryService.UploadImage(file);
-        //    book.PhotoUrl = PhotoInfo.SecureUrl.ToString();
-        //    await _bookRepository.Save(book);
-        //    //return book;
+        public async Task<ResponseDto<GetBookDto>> UpdatePhotoBook(int bookId, AddPhotoDto photo)
+        {
+            var response = new ResponseDto<GetBookDto>();
+            var file = photo.PhotoFile;
+            var book = await _bookRepository.GetById(bookId);
 
-        //}
+            if (book == null)
+            {
+                response.Data = null;
+                response.StatusCode = 404;
+                response.Success = false;
+                response.Message = "Not Found";
+                return response;
+            }
+
+            var PhotoInfo = await _cloudinaryService.UploadImage(file);
+            book.PhotoUrl = PhotoInfo.SecureUrl.ToString();
+
+            await _bookRepository.Update(book);
+
+            var bookDto = _mapper.Map<GetBookDto>(book);
+
+            response.Data = bookDto;
+            response.StatusCode = 200;
+            response.Success = true;
+            response.Message = "Image successfully updated";
+
+            return response;
+        }
     }
 }
