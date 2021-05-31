@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ELibrary.Models;
 
 namespace ELibrary.Dtos.Automapper
 {
@@ -6,6 +7,7 @@ namespace ELibrary.Dtos.Automapper
     {
         public MappingProfile()
         {
+            CreateMap<Book, GetBookDto>();
         }
     }
 }

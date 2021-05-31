@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace ELibrary.Data.Repositories.Abstractions
 {
-    public interface IBookRepository
+    public interface IBookRepository : IRepository<Book>
     {
-        Task<IQueryable<Book>> GetBookByTitle(string bookTitle);
+        IQueryable<Book> GetByCategoryName(string categoryName);
+        IQueryable<Book> GetBookByTitle(string bookTitle);
+
     }
 }

@@ -8,27 +8,36 @@ using System.Threading.Tasks;
 
 namespace ELibrary.Data.Repositories.Implementations
 {
-    public class BookRepository: GenericRepository<Book>, IBookRepository
+    public class BookRepository : GenericRepository<Book>, IBookRepository
     {
-        
-        public BookRepository(ELibraryDbContext context): base(context)
+
+        public BookRepository(ELibraryDbContext context) : base(context)
         {
-            
+
         }
 
-        public async Task<IQueryable<Book>> GetBookByTitle(string title)
+        public IQueryable<Book> GetBookByTitle(string title)
         {
             if (string.IsNullOrEmpty(title))
             {
                 return null;
             }
 
-            title = title.Trim();;
+            title = title.Trim(); ;
 
-            var bookCollection =  _context.Books.Where(book => book.Title.Contains(title));
+            var bookCollection = _context.Books.Where(book => book.Title.Contains(title));
 
             return bookCollection;
         }
 
+        public IQueryable<Book> GetByCategoryName(string CategoryName)
+        {
+            var booksReturned = _context.Books
+                .Where(e => e.Category.Name == CategoryName)
+                .Include(e => e.Category)
+                .Include(e => e.Reviews)
+                .Include(e => e.Rate);
+            return booksReturned;
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace ELibrary.Core.Implementations
         private readonly IRepository<Book> _bookRepository;
         private readonly IBookRepository _bookRepo;
         private readonly IMapper _mapper;
-        public BookServices(IRepository<Book> bookRepository, IBookRepository bookRepo , IMapper mapper)
+        public BookServices(IRepository<Book> bookRepository, IBookRepository bookRepo, IMapper mapper)
         {
             _bookRepository = bookRepository;
             _bookRepo = bookRepo;
@@ -25,7 +25,7 @@ namespace ELibrary.Core.Implementations
 
         public async Task<ResponseDto<AddBookResponseDto>> AddBook(AddBookDto book)
         {
-            
+
             var response = new ResponseDto<AddBookResponseDto>();
 
             if (book == null)
@@ -66,7 +66,7 @@ namespace ELibrary.Core.Implementations
 
             var book = _mapper.Map<Book>(bookResource);
 
-            var bookFromDb  = await _bookRepo.GetBookByTitle(book.Title);
+            var bookFromDb = _bookRepo.GetBookByTitle(book.Title);
 
             var mappedBook = bookFromDb.Select(book => _mapper.Map<GetBookDto>(book));
 
@@ -75,15 +75,40 @@ namespace ELibrary.Core.Implementations
             response.Data = paginatedBooks;
             response.StatusCode = 200;
             response.Success = true;
-  
 
+
+            return response;
+        }
+
+        public async Task<ResponseDto<Pagination<GetBookDto>>> GetByCategory(string CategoryName, int pageIndex, int pageSize)
+        {
+            var books = _bookRepo.GetByCategoryName(CategoryName);
+            if (books == null)
+            {
+                return new ResponseDto<Pagination<GetBookDto>>
+                {
+                    Data = null,
+                    Message = "Not found",
+                    StatusCode = 404,
+                    Success = false
+                };
+            }
+            var bookDto = books.Select(book => _mapper.Map<GetBookDto>(book));
+            var paginatedResult = await Pagination<GetBookDto>.CreateAsync(bookDto, pageIndex, pageSize);
+            var response = new ResponseDto<Pagination<GetBookDto>>
+            {
+                Data = paginatedResult,
+                Message = "Not found",
+                StatusCode = 404,
+                Success = false
+            };
             return response;
         }
 
         public async Task<ResponseDto<UpdateBookResponseDto>> UpdateBook(UpdateBookDto book)
         {
 
-            var response = new  ResponseDto<UpdateBookResponseDto>();
+            var response = new ResponseDto<UpdateBookResponseDto>();
 
             if (book == null)
             {

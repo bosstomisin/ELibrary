@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using ELibrary.Core.Abstractions;
 using ELibrary.Data.Repositories.Abstractions;
 using ELibrary.Data.Repositories.Implementations;
@@ -17,23 +17,25 @@ namespace ELibrary.MVC.Controllers.ApiControllers
     [AllowAnonymous]
     public class BookController : BaseApiController
     {
-        private readonly IBookServices _bookServices;
+        private readonly IBookServices _bookRepo;
         private readonly IBookRepository _bookRepository;
+        private readonly IRateService _rateService;
 
-        public BookController(IBookServices bookServices, IBookRepository bookRepository)
+        public BookController(IBookServices bookServices, IBookRepository bookRepository, IRateService rateService)
         {
-            _bookServices = bookServices;
+            _bookRepo = bookServices;
             _bookRepository = bookRepository;
+            _rateService = rateService;
         }
 
-        
+
         [HttpPost]
         public async Task<IActionResult> AddBook([FromBody] AddBookDto book)
         {
             if (book == null)
                 return NotFound();
 
-            var result = await _bookServices.AddBook(book);
+            var result = await _bookRepo.AddBook(book);
 
             return Ok(result);
         }
@@ -43,8 +45,8 @@ namespace ELibrary.MVC.Controllers.ApiControllers
         {
             if (book == null)
                 return NotFound();
-  
-            var result = await _bookServices.UpdateBook(book);
+
+            var result = await _bookRepo.UpdateBook(book);
 
             return Ok(result);
         }
@@ -55,9 +57,31 @@ namespace ELibrary.MVC.Controllers.ApiControllers
             if (bookResource == null)
                 return NotFound();
 
-            var result = await _bookServices.GetBook(bookResource);
+            var result = await _bookRepo.GetBook(bookResource);
 
             return Ok(result);
+        }
+
+        [HttpGet("get-book-by-category")]
+        public async Task<IActionResult> GetBookByCategory([FromBody] GetBookByCategoryDto getBook)
+        {
+            var result = await _bookRepo.GetByCategory(getBook.categoryName, getBook.pageIndex, getBook.pageSize);
+            if (result != null)
+            {
+                return Ok(result); // 200
+            }
+            return NotFound(result); // 404
+        }
+
+        [HttpPost("rate-a-book")]
+        public async Task<IActionResult> RateABook([FromBody] RateABookDto rateABook)
+        {
+            var result = await _rateService.RateBook(rateABook.BookId, rateABook.RatingValue, rateABook.UserId);
+            if (result != null)
+            {
+                return Ok(result); // 200
+            }
+            return NotFound(); // 404
         }
 
     }
