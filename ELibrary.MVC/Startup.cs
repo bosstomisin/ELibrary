@@ -12,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using AutoMapper;
+using ELibrary.Data.Repositories.Abstractions;
+using ELibrary.Data.Repositories.Implementations;
 
 namespace ELibrary.MVC
 {
@@ -55,6 +57,9 @@ namespace ELibrary.MVC
             services.AddScoped<IEmailServices, EmailServices>();
             services.AddScoped<ICloudinaryServices, CloudinaryServices>();
             services.AddScoped<IAuthServices, AuthServices>();
+            services.AddScoped<IRepository<Book>, BookRepository>();
+            services.AddScoped<IBookServices, BookServices>();
+            services.AddScoped<IBookRepository, BookRepository>();
             services.AddAutoMapper(typeof(Startup));
         }
 

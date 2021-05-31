@@ -3,11 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-
-
 namespace ELibrary.Dtos
 {
-    public class GetBookDto
+    public class UpdateBookDto
     {
         public int Id { get; set; }
         public int CategoryId { get; set; }
