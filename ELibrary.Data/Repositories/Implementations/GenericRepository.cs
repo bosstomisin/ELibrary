@@ -1,12 +1,16 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ELibrary.Data.Repositories.Abstractions;
+using ELibrary.Dtos;
+using ELibrary.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ELibrary.Data.Repositories.Implementations
 {
     public class GenericRepository<T>: IRepository<T> where T: class
     {
-        private readonly ELibraryDbContext _context;
+        protected readonly ELibraryDbContext _context;
 
         public GenericRepository(ELibraryDbContext context)
         {
@@ -27,7 +31,7 @@ namespace ELibrary.Data.Repositories.Implementations
         {
             await _context.Set<T>().AddAsync(model);
             return await _context.SaveChangesAsync() >= 1;
-        }
+            }
 
         public async Task<bool> Update(T model)
         {
@@ -41,5 +45,9 @@ namespace ELibrary.Data.Repositories.Implementations
             _context.Set<T>().Remove(model);
             return await _context.SaveChangesAsync() >= 1;
         }
+
+
+
+
     }
 }
