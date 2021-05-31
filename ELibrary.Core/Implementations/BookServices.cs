@@ -25,6 +25,33 @@ namespace ELibrary.Core.Implementations
             _mapper = mapper;
         }
 
+        public async Task<ResponseDto<AddBookResponseDto>> AddBook(AddBookDto book)
+        {
+
+            var response = new ResponseDto<AddBookResponseDto>();
+
+            if (book == null)
+            {
+                response.Data = null;
+                response.StatusCode = 404;
+                response.Success = false;
+                response.Message = "Not Found";
+            }
+
+            var newBook = _mapper.Map<Book>(book);
+
+            var success = await _bookRepository.Save(newBook);
+
+            var bookFromDb = _mapper.Map<AddBookResponseDto>(newBook);
+
+            response.Data = bookFromDb;
+            response.StatusCode = 201;
+            response.Success = true;
+            response.Message = "New Book Added";
+
+            return response;
+
+        }
 
         public async Task<ResponseDto<Pagination<GetBookDto>>> GetBook(BookResourceParameters bookResource)
         {
@@ -52,31 +79,6 @@ namespace ELibrary.Core.Implementations
             response.Success = true;
 
 
-            return response;
-        }
-
-        public async Task<ResponseDto<Pagination<GetBookDto>>> GetByCategory(string CategoryName, int pageIndex, int pageSize)
-        {
-            var books = _bookRepository.GetByCategoryName(CategoryName);
-            if (books == null)
-            {
-                return new ResponseDto<Pagination<GetBookDto>>
-                {
-                    Data = null,
-                    Message = "Not found",
-                    StatusCode = 404,
-                    Success = false
-                };
-            }
-            var bookDto = books.Select(book => _mapper.Map<GetBookDto>(book));
-            var paginatedResult = await Pagination<GetBookDto>.CreateAsync(bookDto, pageIndex, pageSize);
-            var response = new ResponseDto<Pagination<GetBookDto>>
-            {
-                Data = paginatedResult,
-                Message = "Not found",
-                StatusCode = 404,
-                Success = false
-            };
             return response;
         }
 
