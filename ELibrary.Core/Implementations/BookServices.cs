@@ -133,6 +133,108 @@ namespace ELibrary.Core.Implementations
 
         }
 
+        public async Task<ResponseDto<Pagination<GetBookDto>>> GetBookBySearchTerm(string query, string searchProperty, int pageIndex, int pageSize)
+        {
+            if (searchProperty == null || query == null)
+            {
+                return new ResponseDto<Pagination<GetBookDto>>
+                {
+                    Data = null,
+                    Message = "search parameter should not be null",
+                    StatusCode = 400,
+                    Success = false
+                };
+            }
+            if (searchProperty == "ISBN")
+            {
+                var books = _bookRepo.GetAll().Where(e => e.ISBN == query);
+                var bookDto = books.Select(book => _mapper.Map<GetBookDto>(book));
+                var paginatedResult = await Pagination<GetBookDto>.CreateAsync(bookDto, pageIndex, pageSize);
+
+                var response = new ResponseDto<Pagination<GetBookDto>>
+                {
+                    Data = paginatedResult,
+                    Message = $"you have successfuly quarried books with the ISBN {searchProperty} sesrch property.",
+                    StatusCode = 200,
+                    Success = true
+                };
+
+                return response;
+            }
+
+            if (searchProperty == "Title")
+            {
+                var books = _bookRepo.GetAll().Where(e => e.Title.Contains(query));
+                var bookDto = books.Select(book => _mapper.Map<GetBookDto>(book));
+                var paginatedResult = await Pagination<GetBookDto>.CreateAsync(bookDto, pageIndex, pageSize);
+
+                var response = new ResponseDto<Pagination<GetBookDto>>
+                {
+                    Data = paginatedResult,
+                    Message = $"you have successfuly quarried books with the Title {query} search property.",
+                    StatusCode = 200,
+                    Success = true
+                };
+                return response;
+            }
+
+            if (searchProperty == "Author")
+            {
+                var books = _bookRepo.GetAll().Where(e => e.Author == query);
+                var bookDto = books.Select(book => _mapper.Map<GetBookDto>(book));
+                var paginatedResult = await Pagination<GetBookDto>.CreateAsync(bookDto, pageIndex, pageSize);
+
+                var response = new ResponseDto<Pagination<GetBookDto>>
+                {
+                    Data = paginatedResult,
+                    Message = $"you have successfuly quarried books with the Author {query} search property.",
+                    StatusCode = 200,
+                    Success = true
+                };
+                return response;
+            }
+
+            
+
+            if (searchProperty == "Publisher")
+            {
+                var books = _bookRepo.GetAll().Where(e => e.Publisher == query);
+                var bookDto = books.Select(book => _mapper.Map<GetBookDto>(book));
+                var paginatedResult = await Pagination<GetBookDto>.CreateAsync(bookDto, pageIndex, pageSize);
+
+                var response = new ResponseDto<Pagination<GetBookDto>>
+                {
+                    Data = paginatedResult,
+                    Message = $"you have successfuly quarried books with the Publisher {query} search property.",
+                    StatusCode = 200,
+                    Success = true
+                };
+                return response;
+            }
+
+            if (searchProperty == "PublishedYear")
+            {
+                var books = _bookRepo.GetAll().Where(e => e.PublishedDate.Year == Convert.ToDateTime(query).Year);
+                var bookDto = books.Select(book => _mapper.Map<GetBookDto>(book));
+                var paginatedResult = await Pagination<GetBookDto>.CreateAsync(bookDto, pageIndex, pageSize);
+                var response = new ResponseDto<Pagination<GetBookDto>>
+                {
+                    Data = paginatedResult,
+                    Message = $"you have successfuly quarried books Published in the year {Convert.ToDateTime(query).Year} search property.",
+                    StatusCode = 200,
+                    Success = true
+                };
+                return response;
+            }
+            return new ResponseDto<Pagination<GetBookDto>>
+            {
+                Data = null,
+                Message = "Not found",
+                StatusCode = 400,
+                Success = false
+            };
+        }
+
 
     }
 }

@@ -16,5 +16,8 @@ namespace ELibrary.Core.Abstractions
 
         public Task<ResponseDto<Pagination<GetBookDto>>> GetByCategory(string CategoryName, int pageNumber, int pageSize);
 
+        public Task<ResponseDto<Pagination<GetBookDto>>> GetBookBySearchTerm(string searchTerm, string searchproperty, int pageNumber, int pageSize);
+
+
     }
 }

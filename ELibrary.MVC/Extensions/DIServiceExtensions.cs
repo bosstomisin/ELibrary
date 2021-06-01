@@ -14,7 +14,6 @@ namespace ELibrary.MVC.Extensions
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<IRatingRepository, RatingRepository>();
-            services.AddScoped<IBookService, BookService>();
             services.AddScoped<IRateService, RateService>();
             
         }
