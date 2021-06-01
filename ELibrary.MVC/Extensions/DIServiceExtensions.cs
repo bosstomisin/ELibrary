@@ -11,7 +11,9 @@ namespace ELibrary.MVC.Extensions
     {
         public static void AddDependencyInjection(this IServiceCollection services)
         {
+            services.AddScoped<IRepository<Book>, BookRepository>();
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+            services.AddScoped<IBookServices, BookServices>();
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<IRatingRepository, RatingRepository>();
             services.AddScoped<IBookService, BookService>();
