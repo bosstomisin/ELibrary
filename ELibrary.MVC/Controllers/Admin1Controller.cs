@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace ELibrary.MVC.Controllers
 {
-    public class BookController : Controller
+    public class Admin1Controller : Controller
     {
-        public IActionResult BookDetail()
+        public IActionResult Index()
         {
             return View();
         }
-
-
     }
 }
