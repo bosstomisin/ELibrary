@@ -16,7 +16,6 @@ namespace ELibrary.MVC.Extensions
             services.AddScoped<IBookServices, BookServices>();
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<IRatingRepository, RatingRepository>();
-            services.AddScoped<IBookService, BookService>();
             services.AddScoped<IRateService, RateService>();
             
             services.AddScoped<IUserService, UserService>();
