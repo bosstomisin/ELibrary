@@ -83,7 +83,7 @@ namespace ELibrary.MVC.Controllers.ApiControllers
             return Ok(result);
         }
 
-        [HttpGet]
+        [HttpGet("get-by-title")]
         public async Task<IActionResult> GetBook([FromQuery] BookResourceParameters bookResource)
         {
             if (bookResource == null)
@@ -95,9 +95,9 @@ namespace ELibrary.MVC.Controllers.ApiControllers
         }
 
         [HttpGet("get-book-by-category")]
-        public async Task<IActionResult> GetBookByCategory([FromBody] GetBookByCategoryDto getBook)
+        public async Task<IActionResult> GetBookByCategory([FromQuery] GetBookByCategoryDto getBook)
         {
-            var result = await _bookService.GetByCategory(getBook.categoryName, getBook.pageIndex, getBook.pageSize);
+            var result = await _bookService.GetByCategory(getBook.categoryName, getBook.pageIndex);
             if (result != null)
             {
                 return Ok(result); // 200
@@ -126,6 +126,19 @@ namespace ELibrary.MVC.Controllers.ApiControllers
             }
             return NotFound(result); // 404
         }
+
+        //[HttpGet("get-book-by-category")]
+        //public IActionResult GetBookByCategoryName(string categoryName, int pageIndex )
+        //{
+
+        //    var result = _bookService.GetByCategory(categoryName, pageIndex).Result;
+        //    if (result != null) 
+        //    {
+        //        return Ok(result);
+        //    }
+        //    return NotFound(result); 
+            
+        //}
 
     }
 }
