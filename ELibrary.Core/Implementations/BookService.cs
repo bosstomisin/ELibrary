@@ -46,7 +46,7 @@ namespace ELibrary.Core.Implementations
                     Data = null,
                     Message = "Not found",
                     StatusCode = 404,
-                    Success = false
+                    Success = false,
                 };
             }
 
@@ -57,9 +57,10 @@ namespace ELibrary.Core.Implementations
             var response = new ResponseDto<Pagination<GetBookDto>>
             {
                 Data = paginatedResult,
-                Message = "Not found",
-                StatusCode = 404,
-                Success = false
+                StatusCode = 200,
+                Success = false,
+                Prev = paginatedResult.HasPreviousPage,
+                Next = paginatedResult.HasNextPage
             };
 
             return response;

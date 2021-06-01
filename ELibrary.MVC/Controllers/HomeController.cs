@@ -8,7 +8,6 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace ELibrary.MVC.Controllers
@@ -27,10 +26,7 @@ namespace ELibrary.MVC.Controllers
             var bookUrl = BASE_URL + "book";
             var httpClient = new ApiHttpClient();
             var bookResponse = await httpClient.Client.GetAsync(bookUrl);
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            };
+
             var deserializedBookResponseObject = JsonConvert.DeserializeObject<ResponseDto<Pagination<GetBookDto>>>(await bookResponse.Content.ReadAsStringAsync());
             var deserializedBookResponse = deserializedBookResponseObject.Data;
             var homeViewModel = new HomeViewModel();
