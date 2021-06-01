@@ -1,4 +1,4 @@
- using System;
+using System;
 using System.Collections.Generic;
 
 namespace ELibrary.Models
@@ -24,10 +24,5 @@ namespace ELibrary.Models
         public IEnumerable<Rating> Rate { get; set; }
         public IEnumerable<Review> Reviews { get; set; }
         public Category Category { get; set; }
-
-
-
-
-
     }
 }
