@@ -1,10 +1,33 @@
-﻿@{
+﻿@model HomeViewModel;
+
+@{
     ViewData["Title"] = "Home Page";
+    Layout = "_HomeLayout";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-
+<div class="container pt-20 flex">
+    <aside class="w-1/5">
+        <partial name="Components/_HomeSideBar" model="@Model.Categories" />
+    </aside>
     
+    <section class="w-4/5">
+        <div class="">
+            <h2 class="mb-2 text-2xl">New Releases</h2>
+            <div class="grid grid-cols-4 gap-y-4 gap-x-2">
+                @foreach (var book in @Model.NewestBooks)
+                {
+                    @await Html.PartialAsync("Components/_Book", book)
+                }
+            </div>
+        </div>
+        <div class="mt-8 mb-5">
+            <h2 class="mb-2 text-2xl">Most Popular</h2>
+            <div class="grid grid-cols-4 gap-y-4 gap-x-2">
+                @foreach (var book in @Model.MostPopularBooks)
+                {
+                    @await Html.PartialAsync("Components/_Book", book)
+                }
+            </div>
+        </div>
+    </section>
 </div>
