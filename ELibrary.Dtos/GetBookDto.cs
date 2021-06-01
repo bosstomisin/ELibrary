@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ELibrary.Dtos
 {
-    public class GetBookDto
+   public  class GetBookDto
     {
         public int Id { get; set; }
         public int CategoryId { get; set; }

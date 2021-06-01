@@ -1,10 +1,11 @@
-using AutoMapper;
+﻿using AutoMapper;
 using ELibrary.Core.Abstractions;
 using ELibrary.Data.Repositories.Abstractions;
 using ELibrary.Data.Repositories.Implementations;
 using ELibrary.Dtos;
 using ELibrary.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,18 @@ namespace ELibrary.MVC.Controllers.ApiControllers
         {
             _bookService = bookService;
             _rateService = rateService;
+        }
+
+        [HttpPatch("update/{id}")]
+        public async Task<IActionResult> UpdateBooKPhoto(int id, [FromForm] AddPhotoDto photo)
+        {
+            var response = await _bookServices.UpdatePhotoBook(id, photo);
+            if (response.Data == null)
+            {
+                return BadRequest(response);
+            }
+
+            return Ok(response);
         }
 
 

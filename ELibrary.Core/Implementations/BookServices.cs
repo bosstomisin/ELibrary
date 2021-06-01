@@ -7,19 +7,21 @@ using ELibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ELibrary.Core.Implementations
 {
     public class BookServices : IBookServices
     {
-        private readonly IRepository<Book> _bookRepository;
-        private readonly IBookRepository _bookRepo;
+        private readonly IBookRepository _bookRepository;
+        private readonly ICloudinaryServices _cloudinaryService;
         private readonly IMapper _mapper;
-        public BookServices(IRepository<Book> bookRepository, IBookRepository bookRepo, IMapper mapper)
+
+        public BookServices(IBookRepository bookRepository, ICloudinaryServices cloudinaryService, IMapper mapper)
         {
             _bookRepository = bookRepository;
-            _bookRepo = bookRepo;
+            _cloudinaryService = cloudinaryService;
             _mapper = mapper;
         }
 
@@ -66,7 +68,7 @@ namespace ELibrary.Core.Implementations
 
             var book = _mapper.Map<Book>(bookResource);
 
-            var bookFromDb = _bookRepo.GetBookByTitle(book.Title);
+            var bookFromDb = _bookRepository.GetBookByTitle(book.Title);
 
             var mappedBook = bookFromDb.Select(book => _mapper.Map<GetBookDto>(book));
 
@@ -77,31 +79,6 @@ namespace ELibrary.Core.Implementations
             response.Success = true;
 
 
-            return response;
-        }
-
-        public async Task<ResponseDto<Pagination<GetBookDto>>> GetByCategory(string CategoryName, int pageIndex, int pageSize)
-        {
-            var books = _bookRepo.GetByCategoryName(CategoryName);
-            if (books == null)
-            {
-                return new ResponseDto<Pagination<GetBookDto>>
-                {
-                    Data = null,
-                    Message = "Not found",
-                    StatusCode = 404,
-                    Success = false
-                };
-            }
-            var bookDto = books.Select(book => _mapper.Map<GetBookDto>(book));
-            var paginatedResult = await Pagination<GetBookDto>.CreateAsync(bookDto, pageIndex, pageSize);
-            var response = new ResponseDto<Pagination<GetBookDto>>
-            {
-                Data = paginatedResult,
-                Message = "Not found",
-                StatusCode = 404,
-                Success = false
-            };
             return response;
         }
 
@@ -133,6 +110,35 @@ namespace ELibrary.Core.Implementations
 
         }
 
+        public async Task<ResponseDto<GetBookDto>> UpdatePhotoBook(int bookId, AddPhotoDto photo)
+        {
+            var response = new ResponseDto<GetBookDto>();
+            var file = photo.PhotoFile;
+            var book = await _bookRepository.GetById(bookId);
+
+            if (book == null)
+            {
+                response.Data = null;
+                response.StatusCode = 404;
+                response.Success = false;
+                response.Message = "Not Found";
+                return response;
+            }
+
+            var PhotoInfo = await _cloudinaryService.UploadImage(file);
+            book.PhotoUrl = PhotoInfo.SecureUrl.ToString();
+
+            await _bookRepository.Update(book);
+
+            var bookDto = _mapper.Map<GetBookDto>(book);
+
+            response.Data = bookDto;
+            response.StatusCode = 200;
+            response.Success = true;
+            response.Message = "Image successfully updated";
+
+            return response;
+        }
         public async Task<ResponseDto<Pagination<GetBookDto>>> GetBookBySearchTerm(string query, string searchProperty, int pageIndex, int pageSize)
         {
             if (searchProperty == null || query == null)
