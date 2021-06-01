@@ -9,6 +9,7 @@ namespace ELibrary.Core.Automapper
         public MappingProfile()
         {
             CreateMap<Book, GetBookDto>();
+            CreateMap<AppUser, GetUserDto>();
         }
     }
 }

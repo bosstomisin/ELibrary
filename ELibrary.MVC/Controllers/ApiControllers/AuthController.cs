@@ -1,14 +1,7 @@
 ﻿using ELibrary.Core.Abstractions;
-using ELibrary.Core.Implementations;
 using ELibrary.Dtos;
-using ELibrary.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ELibrary.MVC.Controllers.ApiControllers
@@ -16,7 +9,7 @@ namespace ELibrary.MVC.Controllers.ApiControllers
     [AllowAnonymous]
     public class AuthController : BaseApiController
     {
-        private IAuthServices _authservices;
+        private readonly IAuthServices _authservices;
      
 
         public AuthController(IAuthServices authServices)
@@ -27,7 +20,7 @@ namespace ELibrary.MVC.Controllers.ApiControllers
 
 
 
-        [HttpPost("Register")]
+        [HttpPost("register")]
         public async Task<IActionResult> RegisterAsync([FromForm] RegistrationDto model)
         {
             if (ModelState.IsValid)
@@ -38,7 +31,7 @@ namespace ELibrary.MVC.Controllers.ApiControllers
             return BadRequest("not successful!");
         }
 
-        [HttpPost("Login")]
+        [HttpPost("/Login")]
         public async Task<IActionResult> Login([FromForm] LoginDetailDto model)
         {
             if (ModelState.IsValid)
@@ -70,7 +63,7 @@ namespace ELibrary.MVC.Controllers.ApiControllers
             return Ok(result);
         }
        
-        [HttpPost("ForgetPassword")]
+        [HttpPost("forget-password")]
         public async Task<IActionResult> ForgetPassword([FromBody]ForgotPwdDto model)
         {
             if (string.IsNullOrEmpty(model.Email))
@@ -80,14 +73,14 @@ namespace ELibrary.MVC.Controllers.ApiControllers
 
             if (result.Success)
                 return Ok(result);
-
+            
             return BadRequest(result); 
         }
 
 
 
 
-        [HttpPost("ResetPassword")]
+        [HttpPost("reset-password")]
         public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto model)
         {
             if (ModelState.IsValid)
