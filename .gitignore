@@ -373,4 +373,4 @@ FodyWeavers.xsd
 .vscode/
 
 #database
-elibrary.db
+./ELibrary.MVC/elibrary.db
