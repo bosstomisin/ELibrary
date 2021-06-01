@@ -5,6 +5,7 @@ using ELibrary.Dtos;
 using ELibrary.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -101,6 +102,50 @@ namespace ELibrary.Core.Implementations
 
             return response;
 
+        }
+
+        public IEnumerable< UserSearchTermResponseDto> UserSearch(UserBySearchTermDto model)
+        {
+            var users = new List<UserSearchTermResponseDto>();
+            
+            if (model.SearchProperty == "Name")
+            {
+                var userList = _userManager.Users.Where(x => x.FirstName.Contains(model.SearchTerm) || x.LastName.Contains(model.SearchTerm)).ToList();
+                foreach (var user in userList)
+                {
+                    var userResponse = new UserSearchTermResponseDto
+                    {
+                        Email = user.Email,
+                        FirstName=user.FirstName,
+                        Id=user.Id,
+                        LastName=user.LastName,
+                        PhoneNumber=user.PhoneNumber,
+                        PhotoUrl=user.PhotoUrl,
+                        
+                    };
+                    users.Add(userResponse);
+                }
+               
+            }
+            if (model.SearchProperty == "Email")
+            {
+                var userList = _userManager.Users.Where(x => x.Email==model.SearchTerm).ToList();
+                foreach (var user in userList)
+                {
+                    var userResponse = new UserSearchTermResponseDto
+                    {
+                        Email = user.Email,
+                        FirstName = user.FirstName,
+                        Id = user.Id,
+                        LastName = user.LastName,
+                        PhoneNumber = user.PhoneNumber,
+                        PhotoUrl = user.PhotoUrl,
+
+                    };
+                    users.Add(userResponse);
+                }
+            }
+            return users;
         }
     }
 }

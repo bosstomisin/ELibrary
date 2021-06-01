@@ -1,4 +1,5 @@
 ﻿using ELibrary.Core.Abstractions;
+using ELibrary.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -43,5 +44,18 @@ namespace ELibrary.MVC.Controllers.ApiControllers
             var paginatedUsers = await _userService.GetUsersAsync(pageIndex);
             return Ok(paginatedUsers);
         }
+
+        [HttpGet("SearchTerm")]
+        public IActionResult GetUsers([FromForm] UserBySearchTermDto model )
+        {
+            var users = _userService.UserSearch(model);
+            if (users== null)
+            {
+                NotFound("User not found!");
+            }
+            return Ok(users);
+        }
+
+
     }
 }
