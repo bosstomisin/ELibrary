@@ -5,6 +5,7 @@ using ELibrary.Data.Repositories.Implementations;
 using ELibrary.Dtos;
 using ELibrary.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -17,15 +18,25 @@ namespace ELibrary.MVC.Controllers.ApiControllers
     [AllowAnonymous]
     public class BookController : BaseApiController
     {
-        private readonly IBookServices _bookRepo;
-        private readonly IBookRepository _bookRepository;
+        private readonly IBookServices _bookService;
         private readonly IRateService _rateService;
 
-        public BookController(IBookServices bookServices, IBookRepository bookRepository, IRateService rateService)
+        public BookController(IBookServices bookService, IRateService rateService)
         {
-            _bookRepo = bookServices;
-            _bookRepository = bookRepository;
+            _bookService = bookService;
             _rateService = rateService;
+        }
+
+        [HttpPatch("update/{id}")]
+        public async Task<IActionResult> UpdateBooKPhoto(int id, [FromForm] AddPhotoDto photo)
+        {
+            var response = await _bookService.UpdatePhotoBook(id, photo);
+            if (response.Data == null)
+            {
+                return BadRequest(response);
+            }
+
+            return Ok(response);
         }
 
 
@@ -35,7 +46,7 @@ namespace ELibrary.MVC.Controllers.ApiControllers
             if (book == null)
                 return NotFound();
 
-            var result = await _bookRepo.AddBook(book);
+            var result = await _bookService.AddBook(book);
 
             return Ok(result);
         }
@@ -46,7 +57,7 @@ namespace ELibrary.MVC.Controllers.ApiControllers
             if (book == null)
                 return NotFound();
 
-            var result = await _bookRepo.UpdateBook(book);
+            var result = await _bookService.UpdateBook(book);
 
             return Ok(result);
         }
@@ -57,7 +68,7 @@ namespace ELibrary.MVC.Controllers.ApiControllers
             if (bookResource == null)
                 return NotFound();
 
-            var result = await _bookRepo.GetBook(bookResource);
+            var result = await _bookService.GetBook(bookResource);
 
             return Ok(result);
         }
@@ -65,7 +76,7 @@ namespace ELibrary.MVC.Controllers.ApiControllers
         [HttpGet("get-book-by-category")]
         public async Task<IActionResult> GetBookByCategory([FromBody] GetBookByCategoryDto getBook)
         {
-            var result = await _bookRepo.GetByCategory(getBook.categoryName, getBook.pageIndex, getBook.pageSize);
+            var result = await _bookService.GetByCategory(getBook.categoryName, getBook.pageIndex, getBook.pageSize);
             if (result != null)
             {
                 return Ok(result); // 200
@@ -82,6 +93,17 @@ namespace ELibrary.MVC.Controllers.ApiControllers
                 return Ok(result); // 200
             }
             return NotFound(); // 404
+        }
+
+        [HttpGet("search-for-book")]
+        public async Task<IActionResult> SearchForBook([FromBody] SearchBookDto getBook)
+        {
+            var result = await _bookService.GetBookBySearchTerm(getBook.SearchTerm, getBook.SearchProperty, getBook.PageIndex, getBook.PageSize);
+            if (result != null)
+            {
+                return Ok(result); // 200
+            }
+            return NotFound(result); // 404
         }
 
     }

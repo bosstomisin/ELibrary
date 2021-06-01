@@ -9,7 +9,7 @@ namespace ELibrary.MVC.Controllers.ApiControllers
     [AllowAnonymous]
     public class AuthController : BaseApiController
     {
-        private IAuthServices _authservices;
+        private readonly IAuthServices _authservices;
      
 
         public AuthController(IAuthServices authServices)
@@ -73,7 +73,7 @@ namespace ELibrary.MVC.Controllers.ApiControllers
 
             if (result.Success)
                 return Ok(result);
-
+            
             return BadRequest(result); 
         }
 
