@@ -30,7 +30,7 @@ namespace ELibrary.MVC.Controllers.ApiControllers
         [HttpPatch("update/{id}")]
         public async Task<IActionResult> UpdateBooKPhoto(int id, [FromForm] AddPhotoDto photo)
         {
-            var response = await _bookServices.UpdatePhotoBook(id, photo);
+            var response = await _bookService.UpdatePhotoBook(id, photo);
             if (response.Data == null)
             {
                 return BadRequest(response);
