@@ -18,10 +18,10 @@ namespace ELibrary.MVC.Controllers.ApiControllers
     public class BookController : BaseApiController
     {
         private readonly IBookServices _bookServices;
-        private readonly IBookServices _bookService;
+        private readonly IBookService _bookService;
         private readonly IRateService _rateService;
 
-        public BookController(IBookServices bookServices, IBookServices bookService, IRateService rateService)
+        public BookController(IBookServices bookServices, IBookService bookService, IRateService rateService)
         {
             _bookServices = bookServices;
             _bookService = bookService;
@@ -51,7 +51,7 @@ namespace ELibrary.MVC.Controllers.ApiControllers
         [HttpPatch("update/{id}")]
         public async Task<IActionResult> UpdateBooKPhoto(int id, [FromForm] AddPhotoDto photo)
         {
-            var response = await _bookService.UpdatePhotoBook(id, photo);
+            var response = await _bookServices.UpdatePhotoBook(id, photo);
             if (response.Data == null)
             {
                 return BadRequest(response);
@@ -67,7 +67,7 @@ namespace ELibrary.MVC.Controllers.ApiControllers
             if (book == null)
                 return NotFound();
 
-            var result = await _bookService.AddBook(book);
+            var result = await _bookServices.AddBook(book);
 
             return Ok(result);
         }
@@ -78,7 +78,7 @@ namespace ELibrary.MVC.Controllers.ApiControllers
             if (book == null)
                 return NotFound();
 
-            var result = await _bookService.UpdateBook(book);
+            var result = await _bookServices.UpdateBook(book);
 
             return Ok(result);
         }
@@ -89,7 +89,7 @@ namespace ELibrary.MVC.Controllers.ApiControllers
             if (bookResource == null)
                 return NotFound();
 
-            var result = await _bookService.GetBook(bookResource);
+            var result = await _bookServices.GetBook(bookResource);
 
             return Ok(result);
         }
@@ -119,7 +119,7 @@ namespace ELibrary.MVC.Controllers.ApiControllers
         [HttpGet("search-for-book")]
         public async Task<IActionResult> SearchForBook([FromBody] SearchBookDto getBook)
         {
-            var result = await _bookService.GetBookBySearchTerm(getBook.SearchTerm, getBook.SearchProperty, getBook.PageIndex, getBook.PageSize);
+            var result = await _bookServices.GetBookBySearchTerm(getBook.SearchTerm, getBook.SearchProperty, getBook.PageIndex, getBook.PageSize);
             if (result != null)
             {
                 return Ok(result); // 200

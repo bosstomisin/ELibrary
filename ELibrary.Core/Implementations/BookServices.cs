@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -95,7 +96,7 @@ namespace ELibrary.Core.Implementations
 
             var newBook = _mapper.Map<Book>(book);
 
-            var success = await _bookRepo.Save(newBook);
+            var success = await _bookRepository.Save(newBook);
 
             var bookFromDb = _mapper.Map<AddBookResponseDto>(newBook);
 
@@ -123,7 +124,7 @@ namespace ELibrary.Core.Implementations
 
             var book = _mapper.Map<Book>(bookResource);
 
-            var bookFromDb = _bookRepo.GetBookByTitle(book.Title);
+            var bookFromDb = _bookRepository.GetBookByTitle(book.Title);
 
             var mappedBook = bookFromDb.Select(book => _mapper.Map<GetBookDto>(book));
 
@@ -152,7 +153,7 @@ namespace ELibrary.Core.Implementations
 
             var newBook = _mapper.Map<Book>(book);
 
-            var bookAdded = await _bookRepo.Update(newBook);
+            var bookAdded = await _bookRepository.Update(newBook);
 
             var bookFromDb = _mapper.Map<UpdateBookResponseDto>(newBook);
 
@@ -169,7 +170,7 @@ namespace ELibrary.Core.Implementations
         {
             var response = new ResponseDto<GetBookDto>();
             var file = photo.PhotoFile;
-            var book = await _bookRepo.GetById(bookId);
+            var book = await _bookRepository.GetById(bookId);
 
             if (book == null)
             {
@@ -183,7 +184,7 @@ namespace ELibrary.Core.Implementations
             var PhotoInfo = await _cloudinaryService.UploadImage(file);
             book.PhotoUrl = PhotoInfo.SecureUrl.ToString();
 
-            await _bookRepo.Update(book);
+            await _bookRepository.Update(book);
 
             var bookDto = _mapper.Map<GetBookDto>(book);
 
@@ -208,7 +209,7 @@ namespace ELibrary.Core.Implementations
             }
             if (searchProperty == "ISBN")
             {
-                var books = _bookRepo.GetAll().Where(e => e.ISBN == query);
+                var books = _bookRepository.GetAll().Where(e => e.ISBN == query);
                 var bookDto = books.Select(book => _mapper.Map<GetBookDto>(book));
                 var paginatedResult = await Pagination<GetBookDto>.CreateAsync(bookDto, pageIndex, pageSize);
 
@@ -225,7 +226,7 @@ namespace ELibrary.Core.Implementations
 
             if (searchProperty == "Title")
             {
-                var books = _bookRepo.GetAll().Where(e => e.Title.Contains(query));
+                var books = _bookRepository.GetAll().Where(e => e.Title.Contains(query));
                 var bookDto = books.Select(book => _mapper.Map<GetBookDto>(book));
                 var paginatedResult = await Pagination<GetBookDto>.CreateAsync(bookDto, pageIndex, pageSize);
 
@@ -241,7 +242,7 @@ namespace ELibrary.Core.Implementations
 
             if (searchProperty == "Author")
             {
-                var books = _bookRepo.GetAll().Where(e => e.Author == query);
+                var books = _bookRepository.GetAll().Where(e => e.Author == query);
                 var bookDto = books.Select(book => _mapper.Map<GetBookDto>(book));
                 var paginatedResult = await Pagination<GetBookDto>.CreateAsync(bookDto, pageIndex, pageSize);
 
@@ -259,7 +260,7 @@ namespace ELibrary.Core.Implementations
 
             if (searchProperty == "Publisher")
             {
-                var books = _bookRepo.GetAll().Where(e => e.Publisher == query);
+                var books = _bookRepository.GetAll().Where(e => e.Publisher == query);
                 var bookDto = books.Select(book => _mapper.Map<GetBookDto>(book));
                 var paginatedResult = await Pagination<GetBookDto>.CreateAsync(bookDto, pageIndex, pageSize);
 
@@ -275,7 +276,7 @@ namespace ELibrary.Core.Implementations
 
             if (searchProperty == "PublishedYear")
             {
-                var books = _bookRepo.GetAll().Where(e => e.PublishedDate.Year == Convert.ToDateTime(query).Year);
+                var books = _bookRepository.GetAll().Where(e => e.PublishedDate.Year == Convert.ToDateTime(query).Year);
                 var bookDto = books.Select(book => _mapper.Map<GetBookDto>(book));
                 var paginatedResult = await Pagination<GetBookDto>.CreateAsync(bookDto, pageIndex, pageSize);
                 var response = new ResponseDto<Pagination<GetBookDto>>
