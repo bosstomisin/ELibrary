@@ -1,15 +1,7 @@
-using AutoMapper;
 using ELibrary.Core.Abstractions;
-using ELibrary.Data.Repositories.Abstractions;
-using ELibrary.Data.Repositories.Implementations;
 using ELibrary.Dtos;
-using ELibrary.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ELibrary.MVC.Controllers.ApiControllers
@@ -61,7 +53,7 @@ namespace ELibrary.MVC.Controllers.ApiControllers
         }
 
 
-        [HttpPost]
+        [HttpPost("AddBook")]
         public async Task<IActionResult> AddBook([FromBody] AddBookDto book)
         {
             if (book == null)

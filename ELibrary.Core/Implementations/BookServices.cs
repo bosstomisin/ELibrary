@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using ELibrary.Core.Abstractions;
 using ELibrary.Data.Repositories.Abstractions;
@@ -9,6 +5,9 @@ using ELibrary.Data.Repositories.Implementations;
 using ELibrary.Dtos;
 using ELibrary.Models;
 using Microsoft.Extensions.Configuration;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ELibrary.Core.Implementations
 {

@@ -1,18 +1,4 @@
-﻿<!Doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="~/css/styles.css" />
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Poppins:wght@200;400;600&display=swap" rel="stylesheet">
-</head>
-
-<body class="h-full items-center" style="background: #edf2f7;">
-    <div class="flex flex-row min-h-screen bg-gray-100 text-gray-800">
-        <aside class="sidebar w-64 md:shadow transform -translate-x-full md:translate-x-0 transition-transform duration-150 ease-in bg-indigo-500">
+﻿        <aside class="sidebar h-screen fixed w-64 md:shadow transform -translate-x-full md:translate-x-0 transition-transform duration-150 ease-in bg-indigo-500">
             <div class="sidebar-header flex items-center justify-center py-4">
                 <partial name="Components/_Logo" />
             </div>
@@ -89,41 +75,6 @@
                             <span class="ml-3">Manage Rating</span>
                         </a>
                     </li>
-                    @*<li class="my-px">
-            <a href="#"
-               class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700">
-                <span class="flex items-center justify-center text-lg text-gray-400">
-                    <svg fill="none"
-                         stroke-linecap="round"
-                         stroke-linejoin="round"
-                         stroke-width="2"
-                         viewBox="0 0 24 24"
-                         stroke="currentColor"
-                         class="h-6 w-6">
-                        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                    </svg>
-                </span>
-                <span class="ml-3">Tasks</span>
-            </a>
-        </li>*@
-                    @*<li class="my-px">
-            <a href="#"
-               class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700">
-                <span class="flex items-center justify-center text-lg text-gray-400">
-                    <svg fill="none"
-                         stroke-linecap="round"
-                         stroke-linejoin="round"
-                         stroke-width="2"
-                         viewBox="0 0 24 24"
-                         stroke="currentColor"
-                         class="h-6 w-6">
-                        <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                </span>
-                <span class="ml-3">Clients</span>
-                <span class="flex items-center justify-center text-xs text-red-500 font-semibold bg-red-100 h-6 px-2 rounded-full ml-auto">1k</span>
-            </a>
-        </li>*@
                     <li class="my-px">
                         <a href="#"
                            class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700">
@@ -145,7 +96,7 @@
                         <span class="flex font-medium text-sm text-gray-300 px-4 my-4 uppercase">User</span>
                     </li>
                     <li class="my-px">
-                        <a asp-controller="User" asp-action="GetAllUsers"
+                        <a href="#"
                            class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700">
                             <span class="flex items-center justify-center text-lg text-gray-400">
                                 <svg fill="none"
@@ -161,42 +112,6 @@
                             <span class="ml-3">Manage User</span>
                         </a>
                     </li>
-                    @*<li class="my-px">
-            <a href="#"
-               class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700">
-                <span class="flex items-center justify-center text-lg text-gray-400">
-                    <svg fill="none"
-                         stroke-linecap="round"
-                         stroke-linejoin="round"
-                         stroke-width="2"
-                         viewBox="0 0 24 24"
-                         stroke="currentColor"
-                         class="h-6 w-6">
-                        <path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                    </svg>
-                </span>
-                <span class="ml-3">Notifications</span>
-                <span class="flex items-center justify-center text-xs text-red-500 font-semibold bg-red-100 h-6 px-2 rounded-full ml-auto">10</span>
-            </a>
-        </li>*@
-                    @*<li class="my-px">
-            <a href="#"
-               class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700">
-                <span class="flex items-center justify-center text-lg text-gray-400">
-                    <svg fill="none"
-                         stroke-linecap="round"
-                         stroke-linejoin="round"
-                         stroke-width="2"
-                         viewBox="0 0 24 24"
-                         stroke="currentColor"
-                         class="h-6 w-6">
-                        <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                </span>
-                <span class="ml-3">Settings</span>
-            </a>
-        </li>*@
                     <li class="my-px">
                         <a href="#"
                            class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700">
@@ -217,33 +132,3 @@
                 </ul>
             </div>
         </aside>
-        <main class="main flex flex-col flex-grow -ml-64 md:ml-0 transition-all duration-150 ease-in">
-            <header class="header fixed w-full bg-white shadow py-4 px-4">
-                <div class="header-content flex items-center flex-row">
-                    
-                    <div class="flex ml-auto">
-                        <a href class="flex flex-row items-center">
-                            <img src="https://pbs.twimg.com/profile_images/378800000298815220/b567757616f720812125bfbac395ff54_normal.png"
-                                 alt
-                                 class="h-10 w-10 bg-gray-200 border rounded-full" />
-                            <span class="flex flex-col ml-2">
-                                <span class="truncate w-20 font-semibold tracking-wide leading-none">John Doe</span>
-                                <span class="truncate w-20 text-gray-500 text-xs leading-none mt-1">Manager</span>
-                            </span>
-                        </a>
-                    </div>
-                </div>
-            </header>
-        <div class="main-content flex flex-col flex-grow p-4">
-            <h1 class="font-bold text-2xl text-gray-700">Dashboard</h1>
-
-            <div class="flex flex-col flex-grow border-4 border-gray-400 border-dashed bg-white rounded mt-2">
-                @RenderBody()
-            </div>
-
-        </div>
-        <partial name="Components/_Footer" />
-        </main>
-    </div>
-</body>
-</html>
