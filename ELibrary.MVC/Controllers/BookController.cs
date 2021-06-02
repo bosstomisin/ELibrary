@@ -99,28 +99,5 @@ namespace ELibrary.MVC.Controllers
             return View();
             
         }
-
-
-        //[HttpPost]
-        //public async Task<IActionResult> Login(LoginViewModel model)
-        //{
-        //    var url = BASE_URL + "api/auth/login";
-           
-        //    var userDto = new LoginDetailDto
-        //    {
-        //        Email = model.Email,
-        //        Password = model.Password,
-        //        RemeberMe = false,
-        //    };
-           
-
-          
-        //    return View(responseDto);
-        //}
-
-
-
-
-
     }
 }

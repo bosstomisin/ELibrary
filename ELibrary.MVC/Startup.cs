@@ -51,7 +51,7 @@ namespace ELibrary.MVC
                     options.Password.RequiredLength = 5;
                     options.Password.RequireLowercase = false;
                     options.User.RequireUniqueEmail = true;
-                    options.SignIn.RequireConfirmedEmail = true;
+                    //options.SignIn.RequireConfirmedEmail = true;
 
                 }
                 ).AddEntityFrameworkStores<ELibraryDbContext>().AddDefaultTokenProviders();
