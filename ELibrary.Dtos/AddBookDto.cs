@@ -1,4 +1,5 @@
 ﻿using ELibrary.Models;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -22,7 +23,7 @@ namespace ELibrary.Dtos
         public int AvailableCopies { get; set; }
         public bool Availability { get; set; }
         public int Views { get; set; }
-        public string PhotoUrl { get; set; }
+        public IFormFile PhotoFile { get; set; }
         public IEnumerable<Rating> Rate { get; set; }
         public IEnumerable<Review> Reviews { get; set; }
         public Category Category { get; set; }

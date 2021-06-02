@@ -63,6 +63,7 @@ namespace ELibrary.MVC
             services.AddScoped<IAuthServices, AuthServices>();
             services.AddScoped<IRepository<Book>, BookRepository>();
             services.AddScoped<IBookServices, BookServices>();
+            services.AddScoped<IBookService, BookService>();
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddAutoMapper(typeof(Startup));
             services.AddScoped<IReviewService, ReviewService>();
