@@ -10,8 +10,6 @@ namespace ELibrary.Data.Repositories.Implementations
     {
         public int PageIndex { get; set; }
         public int TotalPages { get; set; }
-        public Pagination()
-        {
 
         public Pagination(IEnumerable<T> items, int count, int pageIndex=1, int pageSize=15)
         {
