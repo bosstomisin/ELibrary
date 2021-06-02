@@ -113,9 +113,54 @@ namespace ELibrary.MVC.Controllers
                 homeViewModel.Categories.Add(category);
             };
 
-            return View(homeViewModel);
+            return View("Index", homeViewModel);
         }
 
+        public async Task<IActionResult> Search([FromQuery] SearchViewModel searchViewModel) 
+        {
+
+            var bookUrl = BASE_URL + $"Book/search-for-book?SearchTerm={searchViewModel.SearchTerm}&SearchProperty={searchViewModel.SearchProperty}&PageIndex={searchViewModel.PageIndex}";
+            var httpClient = new ApiHttpClient();
+            var homeViewModel = new HomeViewModel();
+            var bookResponse = await httpClient.Client.GetAsync(bookUrl);
+            var DeserilizedBookResponse = JsonConvert.DeserializeObject<ResponseDto<Pagination<GetBookDto>>>(await bookResponse.Content.ReadAsStringAsync());
+
+            foreach (var bookDto in DeserilizedBookResponse.Data)
+            {
+                var count = bookDto.Rate.Count();
+                var totalRate = 0;
+
+                if (count != 0)
+                {
+                    totalRate = bookDto.Rate.Sum(rating => rating.Rate) / count;
+                }
+                var bookViewModel = new BookViewModel
+                {
+                    Id = bookDto.Id,
+                    Title = bookDto.Title,
+                    Author = bookDto.Author,
+                    PhotoUrl = bookDto.PhotoUrl,
+                    Rating = totalRate,
+                    Availability = bookDto.Availability
+                };
+                homeViewModel.Books.Add(bookViewModel);
+            };
+
+            var categoryUrl = BASE_URL + "category";
+            var categoryResponse = await httpClient.Client.GetAsync(categoryUrl);
+            var DeserilizedCategoryResponse = JsonConvert.DeserializeObject<ResponseDto<IEnumerable<GetCategoryDto>>>(await categoryResponse.Content.ReadAsStringAsync());
+            foreach (var categoryDto in DeserilizedCategoryResponse.Data)
+            {
+                var category = new CategoryViewModel
+                {
+                    Id = categoryDto.Id,
+                    Name = categoryDto.Name
+                };
+                homeViewModel.Categories.Add(category);
+            };
+
+            return View("Index", homeViewModel);
+        }
 
         public IActionResult Privacy()
         {
@@ -127,5 +172,7 @@ namespace ELibrary.MVC.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
     }
 }

@@ -117,9 +117,9 @@ namespace ELibrary.MVC.Controllers.ApiControllers
         }
 
         [HttpGet("search-for-book")]
-        public async Task<IActionResult> SearchForBook([FromBody] SearchBookDto getBook)
+        public async Task<IActionResult> SearchForBook([FromQuery] SearchBookDto getBook)
         {
-            var result = await _bookServices.GetBookBySearchTerm(getBook.SearchTerm, getBook.SearchProperty, getBook.PageIndex, getBook.PageSize);
+            var result = await _bookServices.GetBookBySearchTerm(getBook.SearchTerm, getBook.SearchProperty, getBook.PageIndex);
             if (result != null)
             {
                 return Ok(result); // 200

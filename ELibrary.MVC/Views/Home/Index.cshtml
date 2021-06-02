@@ -3,6 +3,10 @@
 @{
     ViewData["Title"] = "Home Page";
     Layout = "_HomeLayout";
+
+    ViewData["searchOption"] = new string[] { "Title", "Author", "ISBN", "Publisher", "PublishedYear" };
+    ViewData["controller"] = "Home";
+    ViewData["action"] = "Search";
 }
 
 <div class="container pt-20 flex">
@@ -11,6 +15,10 @@
     </aside>
     
     <section class="w-4/5">
+        <div>
+            @Html.Partial("Components/_SearchAdminPartialView", Model.searchViewModel, ViewData)
+            @*<partial name="Components/_SearchAdminPartialView" view-data="ViewData">*@
+        </div>
         <div class="">
             <h2 class="mb-2 text-2xl">New Releases</h2>
             <div class="grid grid-cols-4 gap-y-4 gap-x-2">
@@ -20,14 +28,5 @@
                 }
             </div>
         </div>
-        @*<div class="mt-8 mb-5">
-            <h2 class="mb-2 text-2xl">Most Popular</h2>
-            <div class="grid grid-cols-4 gap-y-4 gap-x-2">
-                @foreach (var book in @Model.MostPopularBooks)
-                {
-                    @await Html.PartialAsync("Components/_Book", book)
-                }
-            </div>
-        </div>*@
     </section>
 </div>

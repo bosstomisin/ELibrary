@@ -14,7 +14,7 @@ namespace ELibrary.Core.Abstractions
 
         public Task<ResponseDto<GetBookDto>> UpdatePhotoBook(int bookId, AddPhotoDto photo);
         //public Task<ResponseDto<Pagination<GetBookDto>>> GetBookByCategory(string categoryName, int pageIndex);
-        public Task<ResponseDto<Pagination<GetBookDto>>> GetBookBySearchTerm(string searchTerm, string searchproperty, int pageNumber, int pageSize);
+        public Task<ResponseDto<Pagination<GetBookDto>>> GetBookBySearchTerm(string searchTerm, string searchproperty, int pageNumber);
 
 
     }
