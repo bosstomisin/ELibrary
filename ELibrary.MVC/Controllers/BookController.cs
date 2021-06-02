@@ -1,4 +1,5 @@
-﻿using ELibrary.Data.Repositories.Implementations;
+﻿using ELibrary.Common.Helpers;
+using ELibrary.Data.Repositories.Implementations;
 using ELibrary.Dtos;
 using ELibrary.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -24,9 +25,9 @@ namespace ELibrary.MVC.Controllers
 
         public async Task<IActionResult> AdminBookView()
         {
-            //var bookUrl = BASE_URL + "book";
-            var httpClient = new HttpClient();
-            var bookResponse = await httpClient.GetAsync("https://localhost:44326/api/Book/GetAll");
+            
+            var httpClient = new ApiHttpClient();
+            var bookResponse = await httpClient.Client.GetAsync("https://localhost:44326/api/Book/GetAll");
             var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
@@ -36,7 +37,7 @@ namespace ELibrary.MVC.Controllers
             var allbooks = new List<AllBooksViewModel>();
             foreach (var bookDto in deserializedBookResponse)
             {
-                //var totalRate = bookDto.Rate.Sum(rating => rating.Rate) / bookDto.Rate.Count();
+               
                 var book = new AllBooksViewModel
                 {
                     Title = bookDto.Title,

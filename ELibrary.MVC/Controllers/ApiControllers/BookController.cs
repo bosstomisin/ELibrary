@@ -20,7 +20,7 @@ namespace ELibrary.MVC.Controllers.ApiControllers
             _rateService = rateService;
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] int pageIndex = 1)
         {
             var response = await _bookServices.GetAll(pageIndex);
