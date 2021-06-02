@@ -11,6 +11,11 @@ namespace ELibrary.Data.Repositories.Implementations
         public int PageIndex { get; set; }
         public int TotalPages { get; set; }
 
+        public Pagination()
+        {
+
+        }
+
         private Pagination(IEnumerable<T> items, int count, int pageIndex, int pageSize)
         {
             PageIndex = pageIndex;

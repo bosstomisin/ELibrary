@@ -17,6 +17,7 @@
     <ProjectReference Include="..\ELibrary.Data\ELibrary.Data.csproj" />
     <ProjectReference Include="..\ELibrary.Dtos\ELibrary.Dtos.csproj" />
     <ProjectReference Include="..\ELibrary.Models\ELibrary.Models.csproj" />
+    <ProjectReference Include="..\ELibrary.ViewModels\ELibrary.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>
