@@ -145,7 +145,7 @@
                         <span class="flex font-medium text-sm text-gray-300 px-4 my-4 uppercase">User</span>
                     </li>
                     <li class="my-px">
-                        <a href="#"
+                        <a asp-controller="User" asp-action="GetAllUsers"
                            class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700">
                             <span class="flex items-center justify-center text-lg text-gray-400">
                                 <svg fill="none"
@@ -240,7 +240,7 @@
         <div class="main-content flex flex-col flex-grow p-4">
             <h1 class="font-bold text-2xl text-gray-700">Dashboard</h1>
 
-            <div class="flex flex-col flex-grow border-4 border-gray-400 border-dashed bg-white rounded mt-4">
+            <div class="flex flex-col flex-grow border-4 border-gray-400 border-dashed bg-white rounded mt-2">
                 @RenderBody()
             </div>
 

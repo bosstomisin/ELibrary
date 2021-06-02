@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ELibrary.Dtos;
 using ELibrary.Models;
+using ELibrary.ViewModels;
 
 namespace ELibrary.Core.Automapper
 {
@@ -10,6 +11,7 @@ namespace ELibrary.Core.Automapper
         {
             CreateMap<Book, GetBookDto>();
             CreateMap<AppUser, GetUserDto>();
+            CreateMap<GetUserDto, UserViewModel>();
         }
     }
 }
