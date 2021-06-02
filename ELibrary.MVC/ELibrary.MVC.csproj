@@ -14,9 +14,11 @@
     </PackageReference>
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.11.1" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.11.1" />
+    <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ELibrary.Common\ELibrary.Common.csproj" />
     <ProjectReference Include="..\ELibrary.Core\ELibrary.Core.csproj" />
     <ProjectReference Include="..\ELibrary.Data\ELibrary.Data.csproj" />
     <ProjectReference Include="..\ELibrary.Dtos\ELibrary.Dtos.csproj" />
