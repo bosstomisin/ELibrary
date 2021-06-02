@@ -12,5 +12,7 @@ namespace ELibrary.Data.Repositories.Abstractions
         IQueryable<Book> GetByCategoryName(string categoryName);
         IQueryable<Book> GetBookByTitle(string bookTitle);
 
+        IQueryable<Book> Get();
+
     }
 }

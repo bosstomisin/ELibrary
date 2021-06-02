@@ -6,7 +6,12 @@
         @foreach (var item in @Model)
         {
             <li class="">
-                <a class="w-full inline-block py-2 pl-4 hover:text-gray-100 hover:bg-blue-400" asp-controller="" asp-action="" >@item.Name</a>
+                <a class="w-full inline-block py-2 pl-4 hover:text-gray-100 hover:bg-blue-400" 
+                   asp-controller="Home" 
+                   asp-action="GetByCategory" 
+                   asp-route-categoryName="@item.Name" >
+                @item.Name
+                </a>
             </li>
         }
     </ul>
