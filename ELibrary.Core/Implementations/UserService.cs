@@ -97,7 +97,9 @@ namespace ELibrary.Core.Implementations
                 Data = paginatedUsers,
                 Success = true,
                 StatusCode = 200,
-                Message = "Success"
+                Message = "Success",
+                Prev = paginatedUsers.HasPreviousPage,
+                Next = paginatedUsers.HasNextPage
             };
 
             return response;
