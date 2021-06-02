@@ -2,12 +2,14 @@
     <div class="container">
         <div class="flex justify-between">
             <div class="flex">
-                <img src="" alt="" />
-                <span>Logo</span>
+                <a asp-controller="Home" asp-action="Index">
+                    <img src="" alt="" />
+                    <span>Logo</span>
+                </a>
             </div>
             <div>
                 <a class="inline-block px-4 hover:underline" asp-controller="Account" asp-action="Login">Login</a>
-                <a class="inline-block px-4 hover:underline" href="#">Register</a>
+                <a class="inline-block px-4 hover:underline" asp-controller="Account" asp-action="Register">Register</a>
             </div>
         </div>
     </div>
