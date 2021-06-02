@@ -16,6 +16,11 @@ namespace ELibrary.Data.Repositories.Implementations
 
         }
 
+        public IQueryable<Book> Get()
+        {
+            return _context.Books.Include(book => book.Rate);
+        }
+
         public IQueryable<Book> GetBookByTitle(string title)
         {
             if (string.IsNullOrEmpty(title))

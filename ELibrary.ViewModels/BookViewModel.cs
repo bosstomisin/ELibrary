@@ -2,6 +2,7 @@ namespace ELibrary.ViewModels
 {
     public class BookViewModel
     {
+        public int Id { get; set; }
         public string Title { get; set; } = "Name of Book";
         public string Author { get; set; } = "Name of author";
         public bool Availability { get; set; } = true;

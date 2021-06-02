@@ -11,17 +11,16 @@ namespace ELibrary.Data.Repositories.Implementations
         public int PageIndex { get; set; }
         public int TotalPages { get; set; }
 
-        public Pagination()
-        {
-
-        }
-
-        private Pagination(IEnumerable<T> items, int count, int pageIndex, int pageSize)
+        public Pagination(IEnumerable<T> items, int count, int pageIndex=1, int pageSize=15)
         {
             PageIndex = pageIndex;
             TotalPages = (int) Math.Ceiling(count / (double) pageSize);
             
             AddRange(items);
+        }
+
+        public Pagination()
+        {
         }
 
         public bool HasPreviousPage => (PageIndex > 1);

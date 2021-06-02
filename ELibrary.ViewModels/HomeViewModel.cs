@@ -4,9 +4,11 @@ namespace ELibrary.ViewModels
 {
     public class HomeViewModel
     {
-        public  IEnumerable<CategoryViewModel> Categories { get; set; }
-        public IEnumerable<BookViewModel> MostPopularBooks { get; set; } = new BookViewModel[8];
-        public IEnumerable<BookViewModel> NewestBooks { get; set; } = new BookViewModel[8];
+        public List<CategoryViewModel> Categories { get; set; } = new List<CategoryViewModel>();
+        public List<BookViewModel> Books { get; set; } = new List<BookViewModel>();
+        public SearchViewModel searchViewModel { get; set; } = new SearchViewModel();
+        // public List<BookViewModel> MostPopularBooks { get; set; }
+        // public List<BookViewModel> NewestBooks { get; set; } 
         // public NewReleaseViewModel NewRelease { get; set; } = new NewReleaseViewModel();
         // public MostPopularViewModel MostPopular { get; set; } = new MostPopularViewModel();
     }
