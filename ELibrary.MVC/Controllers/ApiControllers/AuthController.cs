@@ -64,7 +64,7 @@ namespace ELibrary.MVC.Controllers.ApiControllers
         }
        
         [HttpPost("forget-password")]
-        public async Task<IActionResult> ForgetPassword([FromBody]ForgotPwdDto model)
+        public async Task<IActionResult> ForgetPassword(ForgotPwdDto model)
         {
             if (string.IsNullOrEmpty(model.Email))
                 return NotFound();

@@ -33,6 +33,7 @@ namespace ELibrary.MVC.Controllers
                 Password = model.Password,
                 RemeberMe = false,
             };
+
             var postRequest = new HttpRequestMessage(HttpMethod.Post, url)
             {
                 Content = JsonContent.Create(userDto)
@@ -74,8 +75,32 @@ namespace ELibrary.MVC.Controllers
             //response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
             var responseDto = JsonSerializer.Deserialize<RegisterViewModel>(content);
+            return View(responseDto);      
+        }
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordModel model)
+        {
+            var url = BASE_URL + "api/auth/forget-password";
+            var client = new ApiHttpClient();
+            var ForgotPwdDto = new ForgotPwdDto() { Email = model.Email };
+           
+            var postRequest = new HttpRequestMessage(HttpMethod.Post, url)
+            {
+                Content = JsonContent.Create(ForgotPwdDto)
+            };
+
+            var response = await client.Client.SendAsync(postRequest);
+            //response.EnsureSuccessStatusCode();
+            var content = await response.Content.ReadAsStringAsync();
+            var responseDto = JsonSerializer.Deserialize<ForgotPasswordModel>(content);
             return View(responseDto);
-            
+
         }
 
 
